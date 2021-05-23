@@ -1,17 +1,14 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:package_examples/shared/package_weblink_view.dart';
 
-// Define a custom Form widget.
 class EmailValidatorMain extends StatefulWidget {
   @override
   _EmailValidatorMainState createState() => _EmailValidatorMainState();
 }
 
-// Define a corresponding State class.
-// This class holds the data related to the Form.
 class _EmailValidatorMainState extends State<EmailValidatorMain> {
-  // Create a text controller and use it to retrieve the current value
-  // of the TextField.
+  bool _isValid = false;
   final myController = TextEditingController();
 
   @override
@@ -25,32 +22,31 @@ class _EmailValidatorMainState extends State<EmailValidatorMain> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Retrieve Text Input'),
+        title: Text('Email Validator'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: TextField(
-          controller: myController,
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        // When the user presses the button, show an alert dialog containing
-        // the text that the user has entered into the text field.
-        onPressed: () {
-          showDialog(
-            context: context,
-            builder: (context) {
-              final bool isValid = EmailValidator.validate(myController.text);
-              return AlertDialog(
-                // Retrieve the text the that user has entered by using the
-                // TextEditingController.
-                content: Text(isValid ? 'Email is valid.' : 'Email is not valid.'),
-              );
-            },
-          );
-        },
-        tooltip: 'Show me the value!',
-        child: Icon(Icons.text_fields),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: TextField(
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter a valid Email Adress'
+              ),
+              onChanged: (value) => {
+                setState(() {
+                  _isValid = EmailValidator.validate(value);
+                }),
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Text(_isValid ? 'Email is valid.' : 'Email is not valid.'),
+          ),
+          Spacer(),
+          PackageWeblinkView('email_validator 2.0.1', 'https://pub.dev/packages/email_validator'),
+        ],
       ),
     );
   }

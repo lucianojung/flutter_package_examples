@@ -43,8 +43,6 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  // --- Widgets ---
-
   _appBar() {
     return AppBar(
       backgroundColor: Theme.of(context).primaryColor,
