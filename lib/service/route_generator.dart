@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:package_examples/packages/email_valiator/email_validator_main.dart';
+import 'package:package_examples/packages/flutter_signin_button/flutter_signin_button.dart';
 
 import '../main.dart';
 
@@ -14,6 +15,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => HomeView());
       case '/email_validator':
         return MaterialPageRoute(builder: (_) => EmailValidatorMain());
+      case '/flutter_signin_button':
+        return MaterialPageRoute(builder: (_) => FlutterSigninButtonMain());
       default:
         return _errorRoute(message: 'wrong routing name');
     }

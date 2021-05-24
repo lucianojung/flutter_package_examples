@@ -67,6 +67,17 @@ class _HomeViewState extends State<HomeView> {
           },
           trailing: Icon(Icons.arrow_forward),
         ),
+        ListTile(
+          leading: Icon(Icons.facebook),
+          title: Text('Flutter Signin Button'),
+          subtitle: Text('Version: 2.0.0'),
+          onTap: () {
+            setState(() {
+              Navigator.of(context).pushNamed('/flutter_signin_button');
+            });
+          },
+          trailing: Icon(Icons.arrow_forward),
+        ),
       ],
     );
   }
