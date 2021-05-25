@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
@@ -27,119 +25,117 @@ class _FlutterSigninButtonMainState extends State<FlutterSigninButtonMain> {
         title: Text('Flutter Signin Button'),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Padding(
-              padding:
-                  const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
-              child: MaterialDropdownView(
-                title: 'Signin Button',
-                subtitle: 'Select a button to display below',
-                onChangedCallback: (newValue) {
-                  _onValueChanged(newValue);
-                },
-                value: _button.name,
-                values: Buttons.values.map((e) => e.name).toList(),
-                negate: false,
+        child: SingleChildScrollView(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Padding(
+                padding:
+                    const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
+                child: MaterialDropdownView(
+                  title: 'Signin Button',
+                  subtitle: 'Select a button to display below',
+                  onChangedCallback: (newValue) {
+                    _onValueChanged(newValue);
+                  },
+                  value: _button.name,
+                  values: Buttons.values.map((e) => e.name).toList(),
+                  negate: false,
+                ),
               ),
-            ),
-            if (!(_button == Buttons.Google ||
-                _button == Buttons.GoogleDark ||
-                _button == Buttons.FacebookNew))
+              if (!(_button == Buttons.Google ||
+                  _button == Buttons.GoogleDark ||
+                  _button == Buttons.FacebookNew))
+                CheckboxListTile(
+                  title: Text("Mini button"),
+                  value: _mini,
+                  onChanged: (newValue) {
+                    setState(() {
+                      _mini = newValue!;
+                    });
+                  },
+                  controlAffinity: ListTileControlAffinity.leading,
+                ),
+              SignInButton(
+                _button,
+                text: 'Sign in with ${_button.name}',
+                onPressed: () {
+                  _showButtonPressDialog(context, _button.name);
+                },
+                mini: _mini,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(top: 16.0),
+                child: Divider(),
+              ),
+              Container(
+                padding: EdgeInsets.all(16.0),
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Signin Button Builder',
+                  style: Theme.of(context).textTheme.headline5,
+                ),
+              ),
+              RadioListTile<IconData>(
+                  title: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Icon(Icons.facebook)),
+                  subtitle: Text('Facebook Icon'),
+                  value: Icons.facebook,
+                  groupValue: _iconDataGroup,
+                  onChanged: (newValue) => _onRadioChanged(newValue!)),
+              RadioListTile<IconData>(
+                  title: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Icon(Icons.message)),
+                  subtitle: Text('Message Icon'),
+                  value: Icons.message,
+                  groupValue: _iconDataGroup,
+                  onChanged: (newValue) => _onRadioChanged(newValue!)),
+              RadioListTile<IconData>(
+                  title: Align(
+                      alignment: Alignment.centerLeft,
+                      child: Icon(Icons.audiotrack)),
+                  subtitle: Text('Audiotrack Icon'),
+                  value: Icons.audiotrack,
+                  groupValue: _iconDataGroup,
+                  onChanged: (newValue) => _onRadioChanged(newValue!)),
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: TextField(
+                  controller: _controller,
+                  decoration: InputDecoration(
+                      border: OutlineInputBorder(),
+                      hintText: 'Enter a Button Name to display'),
+                  onChanged: (value) => {
+                    setState(() { }),
+                  },
+                ),
+              ),
               CheckboxListTile(
                 title: Text("Mini button"),
-                value: _mini,
+                value: _customMini,
                 onChanged: (newValue) {
                   setState(() {
-                    _mini = newValue!;
+                    _customMini = newValue!;
                   });
                 },
                 controlAffinity: ListTileControlAffinity.leading,
               ),
-            SignInButton(
-              _button,
-              text: 'Sign in with ${_button.name}',
-              onPressed: () {
-                _showButtonPressDialog(context, _button.name);
-              },
-              mini: _mini,
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: Divider(),
-            ),
-            Container(
-              padding: EdgeInsets.all(16.0),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Signin Button Builder',
-                style: Theme.of(context).textTheme.headline5,
-              ),
-            ),
-            Column(
-              children: [
-                RadioListTile<IconData>(
-                    title: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Icon(Icons.facebook)),
-                    subtitle: Text('Facebook Icon'),
-                    value: Icons.facebook,
-                    groupValue: _iconDataGroup,
-                    onChanged: (newValue) => _onRadioChanged(newValue!)),
-                RadioListTile<IconData>(
-                    title: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Icon(Icons.message)),
-                    subtitle: Text('Message Icon'),
-                    value: Icons.message,
-                    groupValue: _iconDataGroup,
-                    onChanged: (newValue) => _onRadioChanged(newValue!)),
-                RadioListTile<IconData>(
-                    title: Align(
-                        alignment: Alignment.centerLeft,
-                        child: Icon(Icons.audiotrack)),
-                    subtitle: Text('Audiotrack Icon'),
-                    value: Icons.audiotrack,
-                    groupValue: _iconDataGroup,
-                    onChanged: (newValue) => _onRadioChanged(newValue!)),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: TextField(
-                controller: _controller,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: 'Enter a Button Name to display'),
-                onChanged: (value) => {
-                  setState(() { }),
+              SignInButtonBuilder(
+                icon: _iconDataGroup,
+                text: 'Sign in with ${_controller.text}',
+                onPressed: () {
+                  _showButtonPressDialog(context, _controller.text);
                 },
+                mini: _customMini,
+                backgroundColor: Colors.blueAccent,
               ),
-            ),
-            CheckboxListTile(
-              title: Text("Mini button"),
-              value: _customMini,
-              onChanged: (newValue) {
-                setState(() {
-                  _customMini = newValue!;
-                });
-              },
-              controlAffinity: ListTileControlAffinity.leading,
-            ),
-            SignInButtonBuilder(
-              icon: _iconDataGroup,
-              text: 'Sign in with ${_controller.text}',
-              onPressed: () {
-                _showButtonPressDialog(context, _controller.text);
-              },
-              mini: _customMini,
-              backgroundColor: Colors.blueAccent,
-            ),
-            Spacer(),
-            PackageWeblinkView('flutter_signin_button 2.0.0',
-                'https://pub.dev/packages/flutter_signin_button'),
-          ],
+              //Spacer(),
+              PackageWeblinkView('flutter_signin_button 2.0.0',
+                  'https://pub.dev/packages/flutter_signin_button'),
+            ],
+          ),
         ),
       ),
     );
