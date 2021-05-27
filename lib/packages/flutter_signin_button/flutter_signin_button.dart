@@ -131,7 +131,7 @@ class _FlutterSigninButtonMainState extends State<FlutterSigninButtonMain> {
                 mini: _customMini,
                 backgroundColor: Colors.blueAccent,
               ),
-              //Spacer(),
+              SizedBox(height: 16),
               PackageWeblinkView('flutter_signin_button 2.0.0',
                   'https://pub.dev/packages/flutter_signin_button'),
             ],
