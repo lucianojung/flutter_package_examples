@@ -121,7 +121,7 @@ class _ConvexBottomBarMainState extends State<ConvexBottomBarMain> {
   }
 
   Widget settingList() {
-    return SettingList(height: 136.0, children: [
+    return SettingList(height: 96.0 -_top, children: [
       Padding(
         padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
         child: MaterialDropdownView(
