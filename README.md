@@ -2,6 +2,10 @@
 
 An example App to demonstrate flutter package usage.
 
+## Website
+
+Checkout the app under [flutter-package-examples.netlify.app](https://flutter-package-examples.netlify.app/#/).
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
