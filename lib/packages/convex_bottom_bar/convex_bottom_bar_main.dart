@@ -56,7 +56,7 @@ class _ConvexBottomBarMainState extends State<ConvexBottomBarMain> {
         children: <Widget>[
           settingList(),
           PackageWeblinkView('convex_bottom_bar 3.0.0',
-              'https://pub.dev/packages/convex_bottom_bar', -_top),
+              'https://pub.dev/packages/convex_bottom_bar', bottom: -_top),
         ],
       ),
       bottomNavigationBar: _convexAppBar(),

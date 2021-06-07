@@ -5,14 +5,14 @@ import 'package:url_launcher/url_launcher.dart';
 class PackageWeblinkView extends StatelessWidget {
   String _text;
   String _url;
-  double _bottom;
+  double bottom;
 
-  PackageWeblinkView(this._text, this._url, this._bottom);
+  PackageWeblinkView(this._text, this._url, {this.bottom = 0});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(bottom: _bottom),
+      margin: EdgeInsets.only(bottom: bottom),
       padding: const EdgeInsets.all(16.0),
       alignment: Alignment.bottomCenter,
       child: SizedBox(
