@@ -5,16 +5,18 @@ import 'package:url_launcher/url_launcher.dart';
 class PackageWeblinkView extends StatelessWidget {
   String _text;
   String _url;
+  double _bottom;
 
-  PackageWeblinkView(this._text, this._url);
+  PackageWeblinkView(this._text, this._url, this._bottom);
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(bottom: _bottom),
+      padding: const EdgeInsets.all(16.0),
       alignment: Alignment.bottomCenter,
-      child: Container(
+      child: SizedBox(
         width: 400,
-        padding: const EdgeInsets.all(16.0),
         child: GestureDetector(
           onTap: () => _launchUrl(_url),
           child: MouseRegion(

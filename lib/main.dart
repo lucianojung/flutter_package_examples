@@ -79,6 +79,17 @@ class _HomeViewState extends State<HomeView> {
           trailing: Icon(Icons.arrow_forward),
         ),
         ListTile(
+          leading: Icon(Icons.menu),
+          title: Text('Convex BottomAppBar'),
+          subtitle: Text('Version: 3.0.0'),
+          onTap: () {
+            setState(() {
+              Navigator.of(context).pushNamed('/convex_bottom_bar');
+            });
+          },
+          trailing: Icon(Icons.arrow_forward),
+        ),
+        ListTile(
           leading: Icon(Icons.calendar_today),
           title: Text('Date Format'),
           subtitle: Text('Version: 2.0.2'),
