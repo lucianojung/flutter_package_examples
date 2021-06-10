@@ -20,7 +20,7 @@ I test the Program on myself, so it can happen, so i'm not supposing that there 
 
 ## Submitting changes
 
-Please send a [GitHub Pull Request to this Project](https://github.com/lucianojung/SpaceInvadeUs/pull/new/master) with a clear list of what you've done 
+Please send a [GitHub Pull Request to this Project](https://github.com/lucianojung/flutter_package_examples/pull/new/master) with a clear list of what you've done 
 (read more about [pull requests](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/about-pull-requests)). 
 I can always use more test coverage. Please follow the common coding conventions and make sure all of your commits are atomic (one feature per commit).
 
