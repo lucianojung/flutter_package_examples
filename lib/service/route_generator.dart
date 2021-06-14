@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:package_examples/packages/convex_bottom_bar/convex_bottom_bar_main.dart';
 import 'package:package_examples/packages/email_valiator/email_validator_main.dart';
 import 'package:package_examples/packages/flutter_signin_button/flutter_signin_button.dart';
+import 'package:package_examples/packages/url_launcher/url_launcher_main.dart';
 
 import '../main.dart';
 
@@ -20,6 +21,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => FlutterSigninButtonMain());
       case '/convex_bottom_bar':
         return MaterialPageRoute(builder: (_) => ConvexBottomBarMain());
+      case '/url_launcher':
+        return MaterialPageRoute(builder: (_) => UrlLauncher());
       default:
         return _errorRoute(message: 'wrong routing name');
     }
