@@ -18,7 +18,13 @@ class _UrlLauncherState extends State<UrlLauncher> {
   String _mailToUrl = 'mailto:John@doe.us';
   List<String> _urlList = [];
 
-  bool boolean = false;
+  bool _isWebUrl = true;
+  bool _javaScriptEnabled = false;
+  bool _forceWebViewOrSafariVC = false;
+  bool _enableDomStorage = false;
+  bool _tryWithUniversalLinksOnly = false;
+  bool _sendHeaderInfos = false;
+  Map<String, String> _headers = <String, String>{'my_header_key': 'my_header_value'};
 
   String _urlLauncherVersion = 'url_launcher 6.0.6';
 
@@ -43,8 +49,8 @@ class _UrlLauncherState extends State<UrlLauncher> {
                   padding:
                       const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
                   child: MaterialDropdownView(
-                    title: 'Signin Button',
-                    subtitle: 'Select a button to display below',
+                    title: 'Url Launcher',
+                    subtitle: 'Select an option to display below',
                     onChangedCallback: (newValue) {
                       _onValueChanged(newValue);
                     },
@@ -53,29 +59,77 @@ class _UrlLauncherState extends State<UrlLauncher> {
                     negate: false,
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 16.0),
-                  child: Divider(),
-                ),
-                Container(
-                  padding: EdgeInsets.all(16.0),
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Signin Button Builder',
-                    style: Theme.of(context).textTheme.headline5,
+                if (_isWebUrl)
+                  Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 16.0),
+                        child: Divider(),
+                      ),
+                      Container(
+                        padding: EdgeInsets.all(16.0),
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Options',
+                          style: Theme.of(context).textTheme.headline5,
+                        ),
+                      ),
+                      CheckboxListTile(
+                        title: Text("Enable Java Script"),
+                        value: _javaScriptEnabled,
+                        onChanged: (newValue) {
+                          setState(() {
+                            _javaScriptEnabled = newValue!;
+                          });
+                        },
+                        controlAffinity: ListTileControlAffinity.leading,
+                      ),
+                      //_forceWebViewOrSafariVC
+                      // _enableDomStorage
+                      // _tryWithUniversalLinksOnly
+                      // _sendHeaderInfos
+                      CheckboxListTile(
+                        title: Text("Force WebView Or SafariVC"),
+                        value: _forceWebViewOrSafariVC,
+                        onChanged: (newValue) {
+                          setState(() {
+                            _forceWebViewOrSafariVC = newValue!;
+                          });
+                        },
+                        controlAffinity: ListTileControlAffinity.leading,
+                      ),
+                      CheckboxListTile(
+                        title: Text("Enable Dom Storage"),
+                        value: _enableDomStorage,
+                        onChanged: (newValue) {
+                          setState(() {
+                            _enableDomStorage = newValue!;
+                          });
+                        },
+                        controlAffinity: ListTileControlAffinity.leading,
+                      ),
+                      CheckboxListTile(
+                        title: Text("Try With Universal Links Only"),
+                        value: _tryWithUniversalLinksOnly,
+                        onChanged: (newValue) {
+                          setState(() {
+                            _tryWithUniversalLinksOnly = newValue!;
+                          });
+                        },
+                        controlAffinity: ListTileControlAffinity.leading,
+                      ),
+                      CheckboxListTile(
+                        title: Text("Send with Header Infos"),
+                        value: _sendHeaderInfos,
+                        onChanged: (newValue) {
+                          setState(() {
+                            _sendHeaderInfos = newValue!;
+                          });
+                        },
+                        controlAffinity: ListTileControlAffinity.leading,
+                      ),
+                    ],
                   ),
-                ),
-                if (true)
-                  CheckboxListTile(
-                    title: Text("Mini button"),
-                    value: boolean,
-                    onChanged: (newValue) {
-                      setState(() {
-                        boolean = newValue!;
-                      });
-                    },
-                    controlAffinity: ListTileControlAffinity.leading,
-                  )
               ],
             ),
             customizedWeblinkView()
@@ -88,6 +142,11 @@ class _UrlLauncherState extends State<UrlLauncher> {
   void _onValueChanged(String newValue) {
     setState(() {
       _selectedUrl = newValue;
+      if (newValue == _webUrl || newValue == _ipUrl) {
+        _isWebUrl = true;
+      }  else {
+        _isWebUrl = false;
+      }
     });
   }
 
@@ -136,7 +195,18 @@ class _UrlLauncherState extends State<UrlLauncher> {
 
   Future<void> _launchUrl(String url) async {
     if (await canLaunch(url)) {
-      await launch(url);
+      if (!_isWebUrl)
+        launch(url);
+      else
+        launch(
+            url,
+          forceSafariVC: _forceWebViewOrSafariVC,
+          forceWebView: _forceWebViewOrSafariVC,
+          enableJavaScript: _javaScriptEnabled,
+          enableDomStorage: _enableDomStorage,
+          universalLinksOnly: _tryWithUniversalLinksOnly,
+          headers: (_sendHeaderInfos) ? _headers : {}
+        );
     } else {
       throw 'Could not launch $url';
     }
