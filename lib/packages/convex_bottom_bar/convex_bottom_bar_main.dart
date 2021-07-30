@@ -51,6 +51,7 @@ class _ConvexBottomBarMainState extends State<ConvexBottomBarMain> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
         title: Text('Convex Bottom AppBar'),
       ),
       body: Stack(
@@ -94,7 +95,7 @@ class _ConvexBottomBarMainState extends State<ConvexBottomBarMain> {
                 Color(0xFFFF7F00),
                 Color(0xFFFF0000)
               ]
-            : [Color(0xFF0763e5), Color(0xFF0993f3)],
+            : [Theme.of(context).primaryColor, Theme.of(context).accentColor],
         tileMode: TileMode.repeated,
       ),
     );
@@ -148,6 +149,7 @@ class _ConvexBottomBarMainState extends State<ConvexBottomBarMain> {
         ),
       ),
       Slider(
+          activeColor: Theme.of(context).accentColor,
           value: _height,
           min: _tabstyle == TabStyle.titled ? 20 : 50,
           max: _tabstyle == TabStyle.titled ? 70 : 100,
@@ -166,6 +168,7 @@ class _ConvexBottomBarMainState extends State<ConvexBottomBarMain> {
         ),
       ),
       Slider(
+          activeColor: Theme.of(context).accentColor,
           value: _top,
           min: max(-_curveSize + 1, -95),
           max: -15,
@@ -184,6 +187,7 @@ class _ConvexBottomBarMainState extends State<ConvexBottomBarMain> {
         ),
       ),
       Slider(
+          activeColor: Theme.of(context).accentColor,
           value: _curveSize,
           min: 50,
           max: 250,

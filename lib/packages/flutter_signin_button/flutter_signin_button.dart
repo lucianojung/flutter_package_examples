@@ -23,6 +23,7 @@ class _FlutterSigninButtonMainState extends State<FlutterSigninButtonMain> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
         title: Text('Flutter Signin Button'),
       ),
       body: Center(

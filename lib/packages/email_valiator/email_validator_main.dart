@@ -23,6 +23,7 @@ class _EmailValidatorMainState extends State<EmailValidatorMain> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
         title: Text('Email Validator'),
       ),
       body: Stack(

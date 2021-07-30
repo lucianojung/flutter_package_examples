@@ -38,6 +38,7 @@ class _UrlLauncherState extends State<UrlLauncher> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
         title: Text('Url Launcher'),
       ),
       body: Center(

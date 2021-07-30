@@ -48,6 +48,7 @@ class _DateFormatMainState extends State<DateFormatMain> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).primaryColor,
         title: Text('Date Format'),
       ),
       body: Container(
