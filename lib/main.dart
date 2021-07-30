@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       theme: themeData(),
       onGenerateRoute: RouteGenerator.generateRoute,
-      initialRoute: '/url_launcher',
+      initialRoute: '/',
     );
   }
 
