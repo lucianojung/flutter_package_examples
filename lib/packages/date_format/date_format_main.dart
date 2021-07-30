@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:date_format/date_format.dart';
@@ -12,7 +14,7 @@ class DateFormatMain extends StatefulWidget {
 class _DateFormatMainState extends State<DateFormatMain> {
   String _dateFormat = 'DD, dd.MM.yyyy';
   String _formattedText = '';
-  DateTime _datetime = DateTime.now();
+  late Timer timer;
 
   List<String> _dateFormatList = [
     'DD, dd.MM.yyyy',
@@ -29,7 +31,14 @@ class _DateFormatMainState extends State<DateFormatMain> {
 
   @override
   void initState() {
-    _formattedText = _formatDate(_dateFormat, _datetime);
+    _formattedText = _formatDate(_dateFormat, DateTime.now());
+    timer = Timer.periodic(Duration(milliseconds: 1), (Timer t) => _getTime());
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
   }
 
   @override
@@ -130,7 +139,13 @@ class _DateFormatMainState extends State<DateFormatMain> {
   void _onValueChanged(String newValue) {
     setState(() {
       _dateFormat = newValue;
-      _formattedText = _formatDate(_dateFormat, _datetime);
+      _formattedText = _formatDate(_dateFormat, DateTime.now());
+    });
+  }
+
+  void _getTime() {
+    setState(() {
+      _formattedText = _formatDate(_dateFormat, DateTime.now());
     });
   }
 
