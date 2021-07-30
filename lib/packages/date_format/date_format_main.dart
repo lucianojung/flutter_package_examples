@@ -15,6 +15,9 @@ class _DateFormatMainState extends State<DateFormatMain> {
   String _dateFormat = 'DD, dd.MM.yyyy';
   String _formattedText = '';
   late Timer timer;
+  DateLocale _dateLocale = EnglishDateLocale();
+  String _dateLocaleString = 'EnglishDateLocale';
+  List<String> _dateLocaleList = ['EnglishDateLocale', 'ItalianDateLocale ', 'SpanishDateLocale', 'PortugueseDateLocale', 'TurkishDateLocale', 'VietnameseDateLocale'];
 
   List<String> _dateFormatList = [
     'DD, dd.MM.yyyy',
@@ -57,7 +60,7 @@ class _DateFormatMainState extends State<DateFormatMain> {
                 title: 'Date Format',
                 subtitle: 'Select a format to display below',
                 onChangedCallback: (newValue) {
-                  _onValueChanged(newValue);
+                  _onDateFormatChanged(newValue);
                 },
                 value: _dateFormat,
                 values: _dateFormatList,
@@ -67,18 +70,36 @@ class _DateFormatMainState extends State<DateFormatMain> {
             if (_dateFormat == 'custom')
               Padding(
                 padding: const EdgeInsets.all(16.0),
-                child: TextField(
-                  controller: _myController,
-                  decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      hintText: 'Enter a DateFormat String'),
-                  onChanged: (value) => {
-                    setState(() {
-                      _onValueChanged(_dateFormat);
-                    }),
-                  },
+                child: Container(
+                  child: TextField(
+                    controller: _myController,
+                    decoration: InputDecoration(
+                      filled: true,
+                      fillColor: Colors.white,
+                        border: OutlineInputBorder(borderRadius: BorderRadius.circular(6.0)),
+                        hintText: 'Enter a DateFormat String'),
+                    onChanged: (value) => {
+                      setState(() {
+                        _onDateFormatChanged(_dateFormat);
+                      }),
+                    },
+                  ),
                 ),
               ),
+            Padding(
+              padding:
+              const EdgeInsets.only(bottom: 0, left: 16.0, right: 16.0),
+              child: MaterialDropdownView(
+                title: '',
+                subtitle: 'Select a locale to change the date format language',
+                onChangedCallback: (newValue) {
+                  _onDateLocaleChanged(newValue);
+                },
+                value: _dateLocaleString,
+                values: _dateLocaleList,
+                negate: false,
+              ),
+            ),
             ExpandableNotifier(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
@@ -136,9 +157,17 @@ class _DateFormatMainState extends State<DateFormatMain> {
     );
   }
 
-  void _onValueChanged(String newValue) {
+  void _onDateFormatChanged(String newValue) {
     setState(() {
       _dateFormat = newValue;
+      _formattedText = _formatDate(_dateFormat, DateTime.now());
+    });
+  }
+
+  void _onDateLocaleChanged(String newValue) {
+    setState(() {
+      _dateLocaleString = newValue;
+      _dateLocale = getDateLocaleFromString(_dateLocaleString);
       _formattedText = _formatDate(_dateFormat, DateTime.now());
     });
   }
@@ -152,25 +181,24 @@ class _DateFormatMainState extends State<DateFormatMain> {
   String _formatDate(String dateFormat, DateTime datetime) {
     switch (dateFormat) {
       case 'DD, dd.MM.yyyy':
-        return formatDate(datetime, [DD, ', ', dd, '.', MM, '.', yyyy]);
+        return formatDate(datetime, [DD, ', ', dd, '.', MM, '.', yyyy], locale: _dateLocale);
       case 'D, d.M.yyyy':
-        return formatDate(datetime, [D, ', ', d, '.', M, '.', yyyy]);
+        return formatDate(datetime, [D, ', ', d, '.', M, '.', yyyy], locale: _dateLocale);
       case 'd.m.yyyy':
-        return formatDate(datetime, [d, '.', m, '.', yyyy]);
+        return formatDate(datetime, [d, '.', m, '.', yyyy], locale: _dateLocale);
       case 'mm/dd/yyyy':
-        return formatDate(datetime, [mm, '/', dd, '/', yyyy]);
+        return formatDate(datetime, [mm, '/', dd, '/', yyyy], locale: _dateLocale);
       case 'dd.mm.yyyy, HH:nn:ss':
-        return formatDate(
-            datetime, [dd, '.', mm, '.', yyyy, ', ', HH, ':', nn, ':', ss]);
+        return formatDate(datetime, [dd, '.', mm, '.', yyyy, ', ', HH, ':', nn, ':', ss], locale: _dateLocale);
       case 'hh:nn:ss am':
-        return formatDate(datetime, [hh, ':', nn, ':', ss, ' ', am]);
+        return formatDate(datetime, [hh, ':', nn, ':', ss, ' ', am], locale: _dateLocale);
       case 'HH:nn:ss:SSS:uuu':
-        return formatDate(datetime, [HH, ':', nn, ':', ss, ':', SSS, ':', uuu]);
+        return formatDate(datetime, [HH, ':', nn, ':', ss, ':', SSS, ':', uuu], locale: _dateLocale);
       case 'HH:nn:ss Z':
-        return formatDate(datetime, [HH, ':', nn, ':', ss, ' ', Z]);
+        return formatDate(datetime, [HH, ':', nn, ':', ss, ' ', Z], locale: _dateLocale);
       default:
         var format = stringToDateFormatArray(_myController.text);
-        return formatDate(datetime, format);
+        return formatDate(datetime, format, locale: _dateLocale);
     }
   }
 
@@ -248,5 +276,24 @@ class _DateFormatMainState extends State<DateFormatMain> {
         ),
       ],
     );
+  }
+
+  DateLocale getDateLocaleFromString(String dateLocaleString) {
+    switch (dateLocaleString) {
+      case 'EnglishDateLocale':
+        return EnglishDateLocale();
+      case 'ItalianDateLocale ':
+        return ItalianDateLocale();
+      case 'SpanishDateLocale':
+        return SpanishDateLocale();
+      case 'PortugueseDateLocale':
+        return PortugueseDateLocale();
+      case 'TurkishDateLocale':
+        return TurkishDateLocale();
+      case 'VietnameseDateLocale':
+        return VietnameseDateLocale();
+      default:
+        return EnglishDateLocale();
+    }
   }
 }
