@@ -179,7 +179,7 @@ class _DateFormatMainState extends State<DateFormatMain> {
     var format = <String>[charArray[0]];
     for (int i = 1; i < charArray.length; i++) {
       var value = charArray[i];
-      if (value == charArray[i - 1])
+      if (value == charArray[i - 1] || charArray[i - 1] == '\\')
         format[format.length - 1] = format.last + value;
       else
         format.add(value);
@@ -241,7 +241,7 @@ class _DateFormatMainState extends State<DateFormatMain> {
                 text: 'z or Z            ->  timezone\n',
               ),
               TextSpan(
-                text: '\\\\                   ->  Escape delimiter',
+                text: '\\                   ->  Escape delimiter',
               ),
             ]),
           ),
