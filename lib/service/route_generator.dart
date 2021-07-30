@@ -4,6 +4,7 @@ import 'package:package_examples/packages/convex_bottom_bar/convex_bottom_bar_ma
 import 'package:package_examples/packages/date_format/date_format_main.dart';
 import 'package:package_examples/packages/email_valiator/email_validator_main.dart';
 import 'package:package_examples/packages/flutter_signin_button/flutter_signin_button.dart';
+import 'package:package_examples/packages/url_launcher/url_launcher_main.dart';
 
 import '../main.dart';
 
@@ -21,6 +22,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => FlutterSigninButtonMain());
       case '/convex_bottom_bar':
         return MaterialPageRoute(builder: (_) => ConvexBottomBarMain());
+      case '/url_launcher':
+        return MaterialPageRoute(builder: (_) => UrlLauncher());
       case '/date_format':
         return MaterialPageRoute(builder: (_) => DateFormatMain());
       default:
