@@ -100,6 +100,17 @@ class _HomeViewState extends State<HomeView> {
           },
           trailing: Icon(Icons.arrow_forward),
         ),
+        ListTile(
+          leading: Icon(Icons.launch),
+          title: Text('Url Launcher'),
+          subtitle: Text('Version: 6.0.9'),
+          onTap: () {
+            setState(() {
+              Navigator.of(context).pushNamed('/url_launcher');
+            });
+          },
+          trailing: Icon(Icons.arrow_forward),
+        ),
       ],
     );
   }
