@@ -150,6 +150,7 @@ class _ConvexBottomBarMainState extends State<ConvexBottomBarMain> {
       ),
       Slider(
           activeColor: Theme.of(context).accentColor,
+          inactiveColor: Theme.of(context).accentColor.withAlpha(100),
           value: _height,
           min: _tabstyle == TabStyle.titled ? 20 : 50,
           max: _tabstyle == TabStyle.titled ? 70 : 100,
@@ -169,6 +170,7 @@ class _ConvexBottomBarMainState extends State<ConvexBottomBarMain> {
       ),
       Slider(
           activeColor: Theme.of(context).accentColor,
+          inactiveColor: Theme.of(context).accentColor.withAlpha(100),
           value: _top,
           min: max(-_curveSize + 1, -95),
           max: -15,
@@ -188,6 +190,7 @@ class _ConvexBottomBarMainState extends State<ConvexBottomBarMain> {
       ),
       Slider(
           activeColor: Theme.of(context).accentColor,
+          inactiveColor: Theme.of(context).accentColor.withAlpha(100),
           value: _curveSize,
           min: 50,
           max: 250,
