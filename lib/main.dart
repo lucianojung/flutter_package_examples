@@ -89,6 +89,17 @@ class _HomeViewState extends State<HomeView> {
           },
           trailing: Icon(Icons.arrow_forward),
         ),
+        ListTile(
+          leading: Icon(Icons.calendar_today),
+          title: Text('Date Format'),
+          subtitle: Text('Version: 2.0.2'),
+          onTap: () {
+            setState(() {
+              Navigator.of(context).pushNamed('/date_format');
+            });
+          },
+          trailing: Icon(Icons.arrow_forward),
+        ),
       ],
     );
   }

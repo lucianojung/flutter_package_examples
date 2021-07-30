@@ -135,7 +135,7 @@ class _FlutterSigninButtonMainState extends State<FlutterSigninButtonMain> {
               ],
             ),
             PackageWeblinkView('flutter_signin_button 2.0.0',
-                'https://pub.dev/packages/flutter_signin_button', 0),
+                'https://pub.dev/packages/flutter_signin_button'),
           ],
         ),
       ),

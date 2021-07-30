@@ -17,19 +17,8 @@ class _ConvexBottomBarMainState extends State<ConvexBottomBarMain> {
   bool _fiveItems = false;
   bool _rainbowGradient = false;
   bool _badges = false;
-  List<TabItem> _fiveTabItems = [
-    TabItem(title: 'list', icon: Icons.list),
-    TabItem(title: 'work', icon: Icons.work),
-    TabItem(title: 'calendar', icon: Icons.calendar_today),
-    TabItem(title: 'link', icon: Icons.link),
-    TabItem(title: 'assessment', icon: Icons.assessment),
-  ];
-  List<TabItem> _threeTabItems = [
-    TabItem(title: 'list', icon: Icons.list),
-    TabItem(title: 'calendar', icon: Icons.calendar_today),
-    TabItem(title: 'assessment', icon: Icons.assessment),
-  ];
-  Map<int, dynamic> emptyBadgeList = {};
+  List<TabItem> _fiveTabItems = [];
+  List<TabItem> _threeTabItems = [];
   Map<int, dynamic> listOfBadges = {};
   String _tabbedTab = 'calendar';
   double _height = 50;
@@ -43,6 +32,18 @@ class _ConvexBottomBarMainState extends State<ConvexBottomBarMain> {
       1: iconBadge(12),
       2: iconBadge(7),
     };
+    _fiveTabItems = [
+      TabItem(title: 'list', icon: Icons.list),
+      TabItem(title: 'work', icon: Icons.work),
+      TabItem(title: 'calendar', icon: Icons.calendar_today),
+      TabItem(title: 'link', icon: Icons.link),
+      TabItem(title: 'assessment', icon: Icons.assessment),
+    ];
+    _threeTabItems = [
+      TabItem(title: 'list', icon: Icons.list),
+      TabItem(title: 'calendar', icon: Icons.calendar_today),
+      TabItem(title: 'assessment', icon: Icons.assessment),
+    ];
     super.initState();
   }
 
@@ -56,7 +57,8 @@ class _ConvexBottomBarMainState extends State<ConvexBottomBarMain> {
         children: <Widget>[
           settingList(),
           PackageWeblinkView('convex_bottom_bar 3.0.0',
-              'https://pub.dev/packages/convex_bottom_bar', -_top),
+              'https://pub.dev/packages/convex_bottom_bar',
+              bottom: -_top),
         ],
       ),
       bottomNavigationBar: _convexAppBar(),
@@ -65,7 +67,7 @@ class _ConvexBottomBarMainState extends State<ConvexBottomBarMain> {
 
   ConvexAppBar _convexAppBar() {
     return ConvexAppBar.badge(
-      _badges ? listOfBadges : emptyBadgeList,
+      _badges ? listOfBadges : {},
       style: _tabstyle,
       height: _height,
       top: _top,
@@ -121,7 +123,7 @@ class _ConvexBottomBarMainState extends State<ConvexBottomBarMain> {
   }
 
   Widget settingList() {
-    return SettingList(height: 96.0 -_top, children: [
+    return SettingList(height: 96.0 - _top, children: [
       Padding(
         padding: const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
         child: MaterialDropdownView(

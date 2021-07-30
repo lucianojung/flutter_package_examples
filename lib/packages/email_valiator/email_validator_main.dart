@@ -47,7 +47,7 @@ class _EmailValidatorMainState extends State<EmailValidatorMain> {
               child: Text(_isValid ? 'Email is valid.' : 'Email is not valid.'),
             ),
           ]),
-          PackageWeblinkView('email_validator 2.0.1', 'https://pub.dev/packages/email_validator', 0),
+          PackageWeblinkView('email_validator 2.0.1', 'https://pub.dev/packages/email_validator'),
         ],
       ),
     );
