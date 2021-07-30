@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:package_examples/packages/convex_bottom_bar/convex_bottom_bar_main.dart';
+import 'package:package_examples/packages/date_format/date_format_main.dart';
 import 'package:package_examples/packages/email_valiator/email_validator_main.dart';
 import 'package:package_examples/packages/flutter_signin_button/flutter_signin_button.dart';
 
@@ -20,6 +21,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => FlutterSigninButtonMain());
       case '/convex_bottom_bar':
         return MaterialPageRoute(builder: (_) => ConvexBottomBarMain());
+      case '/date_format':
+        return MaterialPageRoute(builder: (_) => DateFormatMain());
       default:
         return _errorRoute(message: 'wrong routing name');
     }
