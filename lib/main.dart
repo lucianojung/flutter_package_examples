@@ -41,8 +41,8 @@ class _HomeViewState extends State<HomeView> {
         Icons.menu, 'Convex BottomAppBar', '3.0.0', '/convex_bottom_bar'),
     CustomListTile(
         Icons.calendar_today, 'Date Format', '2.0.2', '/date_format'),
-    CustomListTile(Icons.launch, 'Url Launcher', '6.0.9', '/url_launcher'),
-    CustomListTile(Icons.font_download_outlined, 'Google Fonts', '2.1.0', '/google_font'),
+    // CustomListTile(Icons.launch, 'Url Launcher', '6.0.9', '/url_launcher'),
+    // CustomListTile(Icons.font_download_outlined, 'Google Fonts', '2.1.0', '/google_font'),
   ];
 
   @override
