@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:package_examples/shared/appbar.dart';
 import 'package:package_examples/shared/material_dropdown_view.dart';
 import 'package:package_examples/shared/package_weblink_view.dart';
 import 'package:package_examples/shared/setting_list.dart';
@@ -22,10 +23,7 @@ class _FlutterSigninButtonMainState extends State<FlutterSigninButtonMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
-        title: Text('Flutter Signin Button'),
-      ),
+      appBar: CustomAppBar(title: 'Flutter Signin Button'),
       body: Center(
         child: Stack(
           children: [

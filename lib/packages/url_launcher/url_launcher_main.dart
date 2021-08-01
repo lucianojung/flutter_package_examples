@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:package_examples/shared/appbar.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:package_examples/shared/material_dropdown_view.dart';
 import 'package:package_examples/shared/setting_list.dart';
@@ -37,10 +38,7 @@ class _UrlLauncherState extends State<UrlLauncher> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
-        title: Text('Url Launcher'),
-      ),
+      appBar: CustomAppBar(title: 'Url Launcher'),
       body: Center(
         child: Stack(
           children: [
@@ -172,7 +170,6 @@ class _UrlLauncherState extends State<UrlLauncher> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15.0),
                 ),
-                color: Colors.white,
                 elevation: 10,
                 child: Column(
                   mainAxisSize: MainAxisSize.min,

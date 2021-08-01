@@ -29,8 +29,7 @@ class MaterialDropdownView extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Text(
               this.title,
-              style: _themeData.textTheme.headline5!
-                  .copyWith(color: negate ? Colors.white : Colors.black),
+              style: _themeData.textTheme.headline6!
             ),
           ),
         if (this.subtitle != '')
@@ -38,8 +37,7 @@ class MaterialDropdownView extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Text(
               this.subtitle,
-              style: _themeData.textTheme.subtitle1!
-                  .copyWith(color: negate ? Colors.white : Colors.black),
+              style: _themeData.textTheme.subtitle1!,
             ),
           ),
         Padding(
@@ -54,7 +52,6 @@ class MaterialDropdownView extends StatelessWidget {
                     padding: const EdgeInsets.only(left: 15.0, right: 10.0),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(32.0),
-                        color: Colors.white,
                         border: Border.all()),
                     child: DropdownButtonHideUnderline(
                       child: DropdownButton(

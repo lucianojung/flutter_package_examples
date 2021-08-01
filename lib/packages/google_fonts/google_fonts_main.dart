@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:package_examples/shared/appbar.dart';
 import 'package:package_examples/shared/material_dropdown_view.dart';
 import 'package:package_examples/shared/package_weblink_view.dart';
 import 'package:package_examples/shared/setting_list.dart';
@@ -40,10 +41,7 @@ class _GoogleFontsMainState extends State<GoogleFontsMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
-        title: Text('Google Fonts'),
-      ),
+      appBar: CustomAppBar(title: 'Google Fonts'),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Stack(
@@ -72,7 +70,6 @@ class _GoogleFontsMainState extends State<GoogleFontsMain> {
                         borderRadius: BorderRadius.all(Radius.circular(4))),
                     hintText: 'Type something',
                     focusColor: Theme.of(context).primaryColor,
-                    fillColor: Colors.white,
                     hoverColor: Theme.of(context).accentColor.withAlpha(50),
                     filled: true,
                     focusedBorder: OutlineInputBorder(
@@ -105,7 +102,7 @@ class _GoogleFontsMainState extends State<GoogleFontsMain> {
                                 _myController.text,
                                 style: GoogleFonts.getFont(_filteredFontList[i])
                                     .copyWith(
-                                        fontSize: 32, color: Colors.black87),
+                                        fontSize: 32),
                               ),
                             ),
                           ),

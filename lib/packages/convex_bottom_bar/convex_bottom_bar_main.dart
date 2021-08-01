@@ -3,6 +3,7 @@ import 'dart:math';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
+import 'package:package_examples/shared/appbar.dart';
 import 'package:package_examples/shared/material_dropdown_view.dart';
 import 'package:package_examples/shared/package_weblink_view.dart';
 import 'package:package_examples/shared/setting_list.dart';
@@ -50,10 +51,7 @@ class _ConvexBottomBarMainState extends State<ConvexBottomBarMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
-        title: Text('Convex Bottom AppBar'),
-      ),
+      appBar: CustomAppBar(title: 'Convex Bottom AppBar'),
       body: Stack(
         children: <Widget>[
           settingList(),

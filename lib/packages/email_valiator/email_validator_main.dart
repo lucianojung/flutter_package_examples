@@ -1,5 +1,6 @@
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
+import 'package:package_examples/shared/appbar.dart';
 import 'package:package_examples/shared/package_weblink_view.dart';
 import 'package:package_examples/shared/setting_list.dart';
 
@@ -14,10 +15,7 @@ class _EmailValidatorMainState extends State<EmailValidatorMain> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
-        title: Text('Email Validator'),
-      ),
+      appBar: CustomAppBar(title: 'Email Validator'),
       body: Stack(
         children: [
           SettingList(children: [

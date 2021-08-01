@@ -26,7 +26,6 @@ class PackageWeblinkView extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(8.0),
                 ),
-                color: Colors.white,
                 elevation: 10,
                 child: ListTile(
                   leading: Icon(Icons.link),
