@@ -10,14 +10,6 @@ class EmailValidatorMain extends StatefulWidget {
 
 class _EmailValidatorMainState extends State<EmailValidatorMain> {
   bool _isValid = false;
-  final myController = TextEditingController();
-
-  @override
-  void dispose() {
-    // Clean up the controller when the widget is disposed.
-    myController.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

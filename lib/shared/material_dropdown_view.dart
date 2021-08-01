@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class MaterialDropdownView extends StatelessWidget {
   final Function onChangedCallback;
   String title, subtitle, value;
-  List<String> values = [];
+  Iterable<String> values = [];
   bool negate;
 
   MaterialDropdownView(
@@ -22,6 +22,7 @@ class MaterialDropdownView extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData _themeData = Theme.of(context);
     return Column(
+      mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
         if (this.title != '')
           Container(
@@ -43,30 +44,37 @@ class MaterialDropdownView extends StatelessWidget {
           ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Container(
-            width: double.infinity,
-            padding: const EdgeInsets.only(left: 10.0, right: 10.0),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(6.0),
-                color: Colors.white,
-                border: Border.all()),
-            child: DropdownButtonHideUnderline(
-              child: DropdownButton(
-                  value: this.value,
-                  items:
-                      this.values.map<DropdownMenuItem<String>>((String value) {
-                    return DropdownMenuItem<String>(
-                      value: value,
-                      child: Text(
-                        value,
-                        style: _themeData.textTheme.subtitle1,
-                      ),
-                    );
-                  }).toList(),
-                  onChanged: (newValue) {
-                    this.onChangedCallback(newValue);
-                  }),
-            ),
+          child: Row(
+            children: [
+              SizedBox(
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: Container(
+                    height: 40,
+                    padding: const EdgeInsets.only(left: 15.0, right: 10.0),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(32.0),
+                        color: Colors.white,
+                        border: Border.all()),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton(
+                          value: this.value,
+                          items: this
+                              .values
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                          onChanged: (newValue) {
+                            this.onChangedCallback(newValue);
+                          }),
+                    ),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
       ],

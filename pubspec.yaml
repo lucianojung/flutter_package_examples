@@ -34,6 +34,7 @@ dependencies:
   convex_bottom_bar: ^3.0.0
   date_format: ^2.0.2
   expandable: ^5.0.1
+  google_fonts: ^2.1.0
 
 dev_dependencies:
   flutter_test:

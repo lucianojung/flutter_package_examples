@@ -24,27 +24,22 @@ class PackageWeblinkView extends StatelessWidget {
             child: AbsorbPointer(
               child: Card(
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
+                  borderRadius: BorderRadius.circular(8.0),
                 ),
                 color: Colors.white,
                 elevation: 10,
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    ListTile(
-                      leading: Icon(Icons.link),
-                      title: Text(_text),
-                      subtitle: RichText(
-                        text: TextSpan(
-                          text: _url,
-                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
-                                color: Colors.blue,
-                                decoration: TextDecoration.underline,
-                              ),
-                        ),
-                      ),
+                child: ListTile(
+                  leading: Icon(Icons.link),
+                  title: Text(_text),
+                  subtitle: RichText(
+                    text: TextSpan(
+                      text: _url,
+                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                            color: Colors.blue,
+                            decoration: TextDecoration.underline,
+                          ),
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),

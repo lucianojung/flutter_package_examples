@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:package_examples/service/route_generator.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 void main() async {
   runApp(MyApp());
@@ -33,6 +34,18 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+  List<CustomListTile> listTileList = [
+    CustomListTile(
+        Icons.email_outlined, 'Email Validator', '2.0.1', '/email_validator'),
+    CustomListTile(Icons.facebook, 'Flutter Signin Button', '2.0.0',
+        '/flutter_signin_button'),
+    CustomListTile(
+        Icons.menu, 'Convex BottomAppBar', '3.0.0', '/convex_bottom_bar'),
+    CustomListTile(
+        Icons.calendar_today, 'Date Format', '2.0.2', '/date_format'),
+    // CustomListTile(Icons.launch, 'Url Launcher', '6.0.9', '/url_launcher'),
+    // CustomListTile(Icons.font_download_outlined, 'Google Fonts', '2.1.0', '/google_font'),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -56,65 +69,48 @@ class _HomeViewState extends State<HomeView> {
   Widget _body() {
     return Column(
       children: <Widget>[
+        for (CustomListTile listTile in listTileList)
+          ListTile(
+            leading: Icon(listTile.iconData),
+            title: Text(listTile.title),
+            subtitle: Text('Version: ${listTile.version}'),
+            onTap: () {
+              setState(() {
+                Navigator.of(context).pushNamed(listTile.route);
+              });
+            },
+            trailing: Icon(Icons.arrow_forward),
+          ),
+        Divider(),
         ListTile(
-          leading: Icon(Icons.email),
-          title: Text('Email Validator'),
-          subtitle: Text('Version: 2.0.1'),
+          leading: Icon(Icons.assistant),
+          title: Text('Upcoming'),
+          subtitle: Text('Url Launcher, Google Fonts, ...'),
           onTap: () {
             setState(() {
-              Navigator.of(context).pushNamed('/email_validator');
+              _launchUrl('https://lucianojung.medium.com/');
             });
           },
-          trailing: Icon(Icons.arrow_forward),
-        ),
-        ListTile(
-          leading: Icon(Icons.facebook),
-          title: Text('Flutter Signin Button'),
-          subtitle: Text('Version: 2.0.0'),
-          onTap: () {
-            setState(() {
-              Navigator.of(context).pushNamed('/flutter_signin_button');
-            });
-          },
-          trailing: Icon(Icons.arrow_forward),
-        ),
-        ListTile(
-          leading: Icon(Icons.menu),
-          title: Text('Convex BottomAppBar'),
-          subtitle: Text('Version: 3.0.0'),
-          onTap: () {
-            setState(() {
-              Navigator.of(context).pushNamed('/convex_bottom_bar');
-            });
-          },
-          trailing: Icon(Icons.arrow_forward),
-        ),
-        ListTile(
-          leading: Icon(Icons.calendar_today),
-          title: Text('Date Format'),
-          subtitle: Text('Version: 2.0.2'),
-          onTap: () {
-            setState(() {
-              Navigator.of(context).pushNamed('/date_format');
-            });
-          },
-          trailing: Icon(Icons.arrow_forward),
-        ),
-        ListTile(
-          leading: Icon(Icons.launch),
-          title: Text('Url Launcher'),
-          subtitle: Text('Version: 6.0.9'),
-          onTap: () {
-            setState(() {
-              Navigator.of(context).pushNamed('/url_launcher');
-            });
-          },
-          trailing: Icon(Icons.arrow_forward),
         ),
       ],
     );
   }
 
+
+  Future<void> _launchUrl(String url) async {
+    if (await canLaunch(url)) {
+        launch(url);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
 }
 
+class CustomListTile {
+  IconData iconData;
+  String title;
+  String version;
+  String route;
 
+  CustomListTile(this.iconData, this.title, this.version, this.route);
+}
