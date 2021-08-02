@@ -11,8 +11,9 @@ This project is a Flutter app to demonstrate the usage of various packages publi
 
 Check out the app under [flutter-package-examples.netlify.app](https://flutter-package-examples.netlify.app/#/).
 
-##Medium Posts
-Check out the blog posts at [lucianojung.medium.com](https://lucianojung.medium.com/)
+## Medium Posts
+
+Check out the blog post series at [lucianojung.medium.com](https://lucianojung.medium.com/)
 
 ## Getting Started
 
