@@ -1,4 +1,4 @@
-# Flutter Package Example App
+# Flutter package example App
 
 <img width="960" alt="flutter_packages_icon" src="https://user-images.githubusercontent.com/33691403/127861610-85e0a96a-3dda-41d2-903a-cc9f1d3949c4.png">
 
