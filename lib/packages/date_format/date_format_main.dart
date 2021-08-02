@@ -7,6 +7,7 @@ import 'package:package_examples/service/MyTheme.dart';
 import 'package:package_examples/shared/appbar.dart';
 import 'package:package_examples/shared/material_dropdown_view.dart';
 import 'package:package_examples/shared/package_weblink_view.dart';
+import 'package:package_examples/shared/setting_list.dart';
 import 'package:provider/provider.dart';
 
 class DateFormatMain extends StatefulWidget {
@@ -61,142 +62,150 @@ class _DateFormatMainState extends State<DateFormatMain> {
     return Scaffold(
       appBar: CustomAppBar(title: 'Date Format'),
       body: Container(
-        child: Column(
+        child: Stack(
           children: <Widget>[
-            Padding(
-              padding:
-                  const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
-              child: MaterialDropdownView(
-                title: 'Date Format',
-                subtitle: 'Select a format to display below',
-                onChangedCallback: (newValue) {
-                  _onDateFormatChanged(newValue);
-                },
-                value: _dateFormat,
-                values: _dateFormatList,
-                negate: false,
-              ),
-            ),
-            if (_dateFormat == 'custom')
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Container(
-                  child: TextField(
-                    controller: _myController,
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(6.0)),
-                        hintText: 'Enter a DateFormat String'),
-                    onChanged: (value) => {
-                      setState(() {
-                        _onDateFormatChanged(_dateFormat);
-                      }),
+            SettingList(
+              height: 192,
+              children: [
+                Padding(
+                  padding:
+                      const EdgeInsets.only(top: 16.0, left: 16.0, right: 16.0),
+                  child: MaterialDropdownView(
+                    title: 'Date Format',
+                    subtitle: 'Select a format to display below',
+                    onChangedCallback: (newValue) {
+                      _onDateFormatChanged(newValue);
                     },
+                    value: _dateFormat,
+                    values: _dateFormatList,
+                    negate: false,
                   ),
                 ),
-              ),
-            Padding(
-              padding:
-                  const EdgeInsets.only(bottom: 0, left: 16.0, right: 16.0),
-              child: MaterialDropdownView(
-                title: '',
-                subtitle: 'Select a locale to change the date format language',
-                onChangedCallback: (newValue) {
-                  _onDateLocaleChanged(newValue);
-                },
-                value: _dateLocaleString,
-                values: _dateLocaleList,
-                negate: false,
-              ),
-            ),
-            ExpandableNotifier(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Card(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8.0),
+                if (_dateFormat == 'custom')
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Container(
+                      child: TextField(
+                        controller: _myController,
+                        decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(6.0)),
+                            hintText: 'Enter a DateFormat String'),
+                        onChanged: (value) => {
+                          setState(() {
+                            _onDateFormatChanged(_dateFormat);
+                          }),
+                        },
+                      ),
+                    ),
                   ),
-                  elevation: 10,
-                  child: ScrollOnExpand(
-                    scrollOnExpand: true,
-                    scrollOnCollapse: false,
-                    child: ExpandablePanel(
-                      theme: const ExpandableThemeData(
-                        // iconColor: themeProvider.isDarkMode ? Colors.white : Colors.black,
-                        headerAlignment: ExpandablePanelHeaderAlignment.center,
-                        tapBodyToCollapse: true,
+                Padding(
+                  padding:
+                  const EdgeInsets.only(bottom: 0, left: 16.0, right: 16.0),
+                  child: MaterialDropdownView(
+                    title: '',
+                    subtitle: 'Select a locale to change the date format language',
+                    onChangedCallback: (newValue) {
+                      _onDateLocaleChanged(newValue);
+                    },
+                    value: _dateLocaleString,
+                    values: _dateLocaleList,
+                    negate: false,
+                  ),
+                ),
+                ExpandableNotifier(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Card(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8.0),
                       ),
-                      header: Padding(
-                        padding: EdgeInsets.all(8),
-                        child: Text(
-                          "CheatSheet",
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyText2!
-                              .copyWith(fontSize: 18),
-                        ),
-                      ),
-                      collapsed: SizedBox(),
-                      expanded: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Padding(
-                            padding: EdgeInsets.only(bottom: 10),
-                            child: RichText(
-                              text: TextSpan(children: [
-                                TextSpan(
-                                  text: 'yy or yyyy  ->  Year\n' +
-                                      'm or mm   ->  Number of Month\n' +
-                                      'm or mm   ->  Number of Month\n' +
-                                      'M or MM   ->  String of Month\n' +
-                                      'dd or d       ->  Day\n' +
-                                      'w                 ->  week in month\n' +
-                                      'W or WW    ->  week in year\n' +
-                                      'D or DD       ->  weekday\n' +
-                                      'h or hh        ->  hour (0 - 11)\n' +
-                                      'H or HH      ->  hour (0 - 23)\n' +
-                                      'n or nn        ->  minutes\n' +
-                                      's or ss         ->  seconds\n' +
-                                      'S or SSS      ->  milliseconds\n' +
-                                      'u or uuu       ->  microseconds-> \n' +
-                                      'am                ->  AM or PM\n' +
-                                      'z or Z            ->  timezone\n' +
-                                      '\\                   ->  Escape delimiter',
-                                  style: TextStyle(
-                                      color:
-                                      themeProvider.isDarkMode ? Colors.white : Colors.black),
-                                ),
-                              ]),
+                      elevation: 10,
+                      child: ScrollOnExpand(
+                        scrollOnExpand: true,
+                        scrollOnCollapse: false,
+                        child: ExpandablePanel(
+                          theme: const ExpandableThemeData(
+                            // iconColor: themeProvider.isDarkMode ? Colors.white : Colors.black,
+                            headerAlignment: ExpandablePanelHeaderAlignment.center,
+                            tapBodyToCollapse: true,
+                          ),
+                          header: Padding(
+                            padding: EdgeInsets.all(8),
+                            child: Text(
+                              "CheatSheet",
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .subtitle2,
                             ),
                           ),
-                        ],
-                      ),
-                      builder: (_, collapsed, expanded) {
-                        return Padding(
-                          padding:
-                              EdgeInsets.only(left: 10, right: 10, bottom: 10),
-                          child: Expandable(
-                            collapsed: collapsed,
-                            expanded: expanded,
-                            theme: const ExpandableThemeData(crossFadePoint: 0),
+                          collapsed: SizedBox(),
+                          expanded: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Padding(
+                                padding: EdgeInsets.only(bottom: 10),
+                                child: RichText(
+                                  text: TextSpan(children: [
+                                    TextSpan(
+                                      text: 'yy or yyyy  ->  Year\n' +
+                                          'm or mm   ->  Number of Month\n' +
+                                          'm or mm   ->  Number of Month\n' +
+                                          'M or MM   ->  String of Month\n' +
+                                          'dd or d       ->  Day\n' +
+                                          'w                 ->  week in month\n' +
+                                          'W or WW    ->  week in year\n' +
+                                          'D or DD       ->  weekday\n' +
+                                          'h or hh        ->  hour (0 - 11)\n' +
+                                          'H or HH      ->  hour (0 - 23)\n' +
+                                          'n or nn        ->  minutes\n' +
+                                          's or ss         ->  seconds\n' +
+                                          'S or SSS      ->  milliseconds\n' +
+                                          'u or uuu       ->  microseconds-> \n' +
+                                          'am                ->  AM or PM\n' +
+                                          'z or Z            ->  timezone\n' +
+                                          '\\                   ->  Escape delimiter',
+                                      style: TextStyle(
+                                          color:
+                                          themeProvider.isDarkMode ? Colors.white : Colors.black),
+                                    ),
+                                  ]),
+                                ),
+                              ),
+                            ],
                           ),
-                        );
-                      },
+                          builder: (_, collapsed, expanded) {
+                            return Padding(
+                              padding:
+                              EdgeInsets.only(left: 10, right: 10, bottom: 10),
+                              child: Expandable(
+                                collapsed: collapsed,
+                                expanded: expanded,
+                                theme: const ExpandableThemeData(crossFadePoint: 0),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
                     ),
                   ),
                 ),
-              ),
+              ],
             ),
-            Spacer(),
-            Container(
-              padding: EdgeInsets.all(16.0),
-              child: Text(
-                _formattedText,
-                style: Theme.of(context).textTheme.headline6,
-              ),
-            ),
-            PackageWeblinkView(
-                'date_format 2.0.2', 'https://pub.dev/packages/date_format'),
+           Column(
+             mainAxisAlignment: MainAxisAlignment.end,
+             children: [
+               Container(
+                 padding: EdgeInsets.all(16.0),
+                 child: Text(
+                   _formattedText,
+                   style: Theme.of(context).textTheme.headline6,
+                 ),
+               ),
+               PackageWeblinkView(
+                   'date_format 2.0.2', 'https://pub.dev/packages/date_format'),
+             ],
+           )
           ],
         ),
       ),
