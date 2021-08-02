@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:package_examples/shared/appbar.dart';
 import 'package:package_examples/shared/material_dropdown_view.dart';
@@ -73,8 +74,8 @@ class _GoogleFontsMainState extends State<GoogleFontsMain> {
                     hoverColor: Theme.of(context).accentColor.withAlpha(50),
                     filled: true,
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Theme.of(context).primaryColor)
-                    ),
+                        borderSide:
+                            BorderSide(color: Theme.of(context).primaryColor)),
                   ),
                   controller: _myController,
                   onChanged: (value) => {
@@ -101,8 +102,15 @@ class _GoogleFontsMainState extends State<GoogleFontsMain> {
                               subtitle: Text(
                                 _myController.text,
                                 style: GoogleFonts.getFont(_filteredFontList[i])
-                                    .copyWith(
-                                        fontSize: 32),
+                                    .copyWith(fontSize: 32),
+                              ),
+                              trailing: IconButton(
+                                icon: Icon(Icons.copy),
+                                tooltip: 'copy font name',
+                                onPressed: () {
+                                  Clipboard.setData(ClipboardData(
+                                      text: _filteredFontList[i]));
+                                },
                               ),
                             ),
                           ),

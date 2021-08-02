@@ -12,21 +12,25 @@ class ThemeProvider extends ChangeNotifier {
 
 class MyTheme {
   static Color _mainColor = Color(0xff67bcb3);
+  static Color _secondaryColor = Color(0xff92ded6);
+  static TextStyle _blackTextStyle = TextStyle(color: Colors.black);
+  static TextStyle _black54TextStyle = TextStyle(color: Colors.black54);
+  static TextStyle _black87TextStyle = TextStyle(color: Colors.black87);
 
   static final lightTheme = ThemeData.light().copyWith(
       primaryColor: _mainColor,
-      accentColor: Color(0xff92ded6),
+      accentColor: _secondaryColor,
       textTheme: TextTheme(
-        headline1: TextStyle(color: Colors.black),
-        headline2: TextStyle(color: Colors.black),
-        headline3: TextStyle(color: Colors.black),
-        headline4: TextStyle(color: Colors.black),
-        headline5: TextStyle(color: Colors.black),
-        headline6: TextStyle(color: Colors.black),
-        subtitle1: TextStyle(color: Colors.black87),
-        subtitle2: TextStyle(color: Colors.black87),
-        bodyText1: TextStyle(color: Colors.black54),
-        bodyText2: TextStyle(color: Colors.black54),
+        headline1: _blackTextStyle,
+        headline2: _blackTextStyle,
+        headline3: _blackTextStyle,
+        headline4: _blackTextStyle,
+        headline5: _blackTextStyle,
+        headline6: _blackTextStyle,
+        bodyText1: _black54TextStyle,
+        bodyText2: _black54TextStyle,
+        subtitle1: _black87TextStyle,
+        subtitle2: _black87TextStyle,
       ),
       appBarTheme: _appBarTheme,
     );
