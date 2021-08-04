@@ -46,7 +46,7 @@ class _CryptoState extends State<Crypto> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(title: 'Url Launcher'),
+      appBar: CustomAppBar(title: 'Crypto'),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
