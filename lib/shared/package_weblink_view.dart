@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class PackageWeblinkView extends StatelessWidget {
-  String _text;
-  String _url;
-  double bottom;
+  final String _text;
+  final String _url;
+  final double bottom;
 
   PackageWeblinkView(this._text, this._url, {this.bottom = 0});
 
@@ -28,7 +28,7 @@ class PackageWeblinkView extends StatelessWidget {
                 ),
                 elevation: 10,
                 child: ListTile(
-                  leading: Icon(Icons.link),
+                  trailing: Icon(Icons.launch),
                   title: Text(_text),
                   subtitle: RichText(
                     text: TextSpan(

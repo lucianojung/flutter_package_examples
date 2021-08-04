@@ -40,7 +40,6 @@ class _FlutterSigninButtonMainState extends State<FlutterSigninButtonMain> {
                     },
                     value: _button.name,
                     values: Buttons.values.map((e) => e.name).toList(),
-                    negate: false,
                   ),
                 ),
                 if (!(_button == Buttons.Google ||

@@ -47,6 +47,7 @@ class _DateFormatMainState extends State<DateFormatMain> {
   void initState() {
     _formattedText = _formatDate(_dateFormat, DateTime.now());
     timer = Timer.periodic(Duration(milliseconds: 1), (Timer t) => _getTime());
+    super.initState();
   }
 
   @override
@@ -78,7 +79,6 @@ class _DateFormatMainState extends State<DateFormatMain> {
                     },
                     value: _dateFormat,
                     values: _dateFormatList,
-                    negate: false,
                   ),
                 ),
                 if (_dateFormat == 'custom')
@@ -110,7 +110,6 @@ class _DateFormatMainState extends State<DateFormatMain> {
                     },
                     value: _dateLocaleString,
                     values: _dateLocaleList,
-                    negate: false,
                   ),
                 ),
                 ExpandableNotifier(

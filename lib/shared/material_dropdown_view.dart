@@ -2,21 +2,15 @@ import 'package:flutter/material.dart';
 
 class MaterialDropdownView extends StatelessWidget {
   final Function onChangedCallback;
-  String title, subtitle, value;
-  Iterable<String> values = [];
-  bool negate;
+  final String title, subtitle, value;
+  final Iterable<String> values;
 
   MaterialDropdownView(
-      {required this.title,
-      required this.subtitle,
+      {this.title = '',
+      this.subtitle = '',
       required this.value,
       required this.values,
-      required this.onChangedCallback,
-      required this.negate}) {
-    this.title = title != null ? title : '';
-    this.subtitle = subtitle != null ? subtitle : '';
-    this.negate = negate != null ? negate : false;
-  }
+      required this.onChangedCallback});
 
   @override
   Widget build(BuildContext context) {

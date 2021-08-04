@@ -21,7 +21,7 @@ class _CryptoState extends State<Crypto> {
   final _secretController = TextEditingController();
   final _keyController = TextEditingController();
 
-  Map<Algorithm, String> _algorithm_map = {
+  Map<Algorithm, String> _algorithmMap = {
     Algorithm.SHA1: 'SHA-1',
     Algorithm.SHA224: 'SHA-224',
     Algorithm.SHA256: 'SHA-256',
@@ -122,7 +122,7 @@ class _CryptoState extends State<Crypto> {
                   ),
                   Column(
                     children: [
-                      for (MapEntry algorithm in _algorithm_map.entries)
+                      for (MapEntry algorithm in _algorithmMap.entries)
                         SizedBox(
                           child: Card(
                             shape: RoundedRectangleBorder(

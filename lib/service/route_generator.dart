@@ -28,7 +28,7 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => UrlLauncher());
       case '/date_format':
         return MaterialPageRoute(builder: (_) => DateFormatMain());
-      case '/google_font':
+      case '/google_fonts':
         return MaterialPageRoute(builder: (_) => GoogleFontsMain());
       case '/crypto':
         return MaterialPageRoute(builder: (_) => Crypto());

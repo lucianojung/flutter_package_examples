@@ -11,29 +11,29 @@ class UrlLauncher extends StatefulWidget {
 }
 
 class _UrlLauncherState extends State<UrlLauncher> {
-  String _selectedUrl = '';
+  String _selectedUrl = 'Website url';
 
-  String _webUrl = 'https://pub.dev/packages/url_launcher';
-  String _ipUrl = 'http://192.168.0.1/';
-  String _phoneUrl = 'tel:0161/12345678';
-  String _mailToUrl = 'mailto:John@doe.us';
-  List<String> _urlList = [];
+  Map <String, String> _urlMap = {
+    'Website url': 'https://pub.dev/packages/url_launcher',
+     'Ip adress': 'http://192.168.0.1/',
+     'Telefone number': 'tel:0161/12345678',
+     'New Mail': 'mailto:John@doe.us',
+     'New Mail with Queries': 'mailto:John@doe.us?subject=News&body=New plugin',
+     'Sms': 'sms:123456789'
+  };
 
   bool _isWebUrl = true;
+  bool _forceWebView = false;
   bool _javaScriptEnabled = false;
-  bool _forceWebViewOrSafariVC = false;
   bool _enableDomStorage = false;
-  bool _tryWithUniversalLinksOnly = false;
   bool _sendHeaderInfos = false;
+  bool _forceSafarieVC = false;
+  bool _universalLinksOnly = false;
+  bool _statusBarBrigthness = false;
+  bool _webOnlyWindowName = false;
   Map<String, String> _headers = <String, String>{'my_header_key': 'my_header_value'};
 
   String _urlLauncherVersion = 'url_launcher 6.0.6';
-
-  @override
-  void initState() {
-    _urlList.addAll([_webUrl, _ipUrl, _phoneUrl, _mailToUrl]);
-    _selectedUrl = _webUrl;
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -43,6 +43,7 @@ class _UrlLauncherState extends State<UrlLauncher> {
         child: Stack(
           children: [
             SettingList(
+              height: 160,
               children: <Widget>[
                 Padding(
                   padding:
@@ -54,8 +55,7 @@ class _UrlLauncherState extends State<UrlLauncher> {
                       _onValueChanged(newValue);
                     },
                     value: _selectedUrl,
-                    values: _urlList,
-                    negate: false,
+                    values: _urlMap.entries.map((e) => e.key).toList(),
                   ),
                 ),
                 if (_isWebUrl)
@@ -66,39 +66,45 @@ class _UrlLauncherState extends State<UrlLauncher> {
                         child: Divider(),
                       ),
                       Container(
-                        padding: EdgeInsets.all(16.0),
+                        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'Options',
-                          style: Theme.of(context).textTheme.headline5,
+                          style: Theme.of(context).textTheme.headline6,
+                        ),
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'For Android',
+                          style: Theme.of(context).textTheme.subtitle2,
                         ),
                       ),
                       CheckboxListTile(
-                        title: Text("Enable Java Script"),
-                        value: _javaScriptEnabled,
+                        title: Text("Open in WebView"),
+                        value: _forceWebView,
                         onChanged: (newValue) {
                           setState(() {
-                            _javaScriptEnabled = newValue!;
+                            _forceWebView = newValue!;
                           });
                         },
                         controlAffinity: ListTileControlAffinity.leading,
                       ),
-                      //_forceWebViewOrSafariVC
-                      // _enableDomStorage
-                      // _tryWithUniversalLinksOnly
-                      // _sendHeaderInfos
+                      if(_forceWebView)
+                        CheckboxListTile(
+                          title: Text("Enable Java Script"),
+                          value: _javaScriptEnabled,
+                          onChanged: (newValue) {
+                            setState(() {
+                              _javaScriptEnabled = newValue!;
+                            });
+                          },
+                          controlAffinity: ListTileControlAffinity.leading,
+                        ),
+                      if(_forceWebView)
                       CheckboxListTile(
-                        title: Text("Force WebView Or SafariVC"),
-                        value: _forceWebViewOrSafariVC,
-                        onChanged: (newValue) {
-                          setState(() {
-                            _forceWebViewOrSafariVC = newValue!;
-                          });
-                        },
-                        controlAffinity: ListTileControlAffinity.leading,
-                      ),
-                      CheckboxListTile(
-                        title: Text("Enable Dom Storage"),
+                        title: Text("Enable DOM Storage"),
                         value: _enableDomStorage,
                         onChanged: (newValue) {
                           setState(() {
@@ -107,22 +113,69 @@ class _UrlLauncherState extends State<UrlLauncher> {
                         },
                         controlAffinity: ListTileControlAffinity.leading,
                       ),
+                      if(_forceWebView)
+                        CheckboxListTile(
+                          title: Text("Add Extra headers"),
+                          value: _sendHeaderInfos,
+                          onChanged: (newValue) {
+                            setState(() {
+                              _sendHeaderInfos = newValue!;
+                            });
+                          },
+                          controlAffinity: ListTileControlAffinity.leading,
+                        ),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'For iOS',
+                          style: Theme.of(context).textTheme.subtitle2,
+                        ),
+                      ),
                       CheckboxListTile(
-                        title: Text("Try With Universal Links Only"),
-                        value: _tryWithUniversalLinksOnly,
+                        title: Text("Open in Safari View Controller"),
+                        value: _forceSafarieVC,
                         onChanged: (newValue) {
                           setState(() {
-                            _tryWithUniversalLinksOnly = newValue!;
+                            _forceSafarieVC = newValue!;
                           });
                         },
                         controlAffinity: ListTileControlAffinity.leading,
                       ),
                       CheckboxListTile(
-                        title: Text("Send with Header Infos"),
-                        value: _sendHeaderInfos,
+                        title: Text("Try With Universal Links Only"),
+                        value: _universalLinksOnly,
                         onChanged: (newValue) {
                           setState(() {
-                            _sendHeaderInfos = newValue!;
+                            _universalLinksOnly = newValue!;
+                          });
+                        },
+                        controlAffinity: ListTileControlAffinity.leading,
+                      ),
+                      CheckboxListTile(
+                        title: Text("Set the status bar brightness to dark"),
+                        value: _statusBarBrigthness,
+                        onChanged: (newValue) {
+                          setState(() {
+                            _statusBarBrigthness = newValue!;
+                          });
+                        },
+                        controlAffinity: ListTileControlAffinity.leading,
+                      ),
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'For Web',
+                          style: Theme.of(context).textTheme.subtitle2,
+                        ),
+                      ),
+                      CheckboxListTile(
+                        title: Text("Open in the current Tab"),
+                        value: _webOnlyWindowName,
+                        onChanged: (newValue) {
+                          setState(() {
+                            _webOnlyWindowName = newValue!;
                           });
                         },
                         controlAffinity: ListTileControlAffinity.leading,
@@ -147,7 +200,7 @@ class _UrlLauncherState extends State<UrlLauncher> {
   void _onValueChanged(String newValue) {
     setState(() {
       _selectedUrl = newValue;
-      if (newValue == _webUrl || newValue == _ipUrl) {
+      if (newValue == 'Website url' || newValue == 'Ip adress') {
         _isWebUrl = true;
       }  else {
         _isWebUrl = false;
@@ -162,7 +215,7 @@ class _UrlLauncherState extends State<UrlLauncher> {
       child: SizedBox(
         width: 400,
         child: GestureDetector(
-          onTap: () => _launchUrl(_selectedUrl),
+          onTap: () => _launchUrl(_urlMap[_selectedUrl]!),
           child: MouseRegion(
             cursor: SystemMouseCursors.click,
             child: AbsorbPointer(
@@ -175,11 +228,11 @@ class _UrlLauncherState extends State<UrlLauncher> {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     ListTile(
-                      leading: Icon(Icons.link),
-                      title: Text(_urlLauncherVersion),
+                      trailing: Icon(Icons.launch),
+                      title: Text(_selectedUrl == 'Website url' ? _urlLauncherVersion : _selectedUrl),
                       subtitle: RichText(
                         text: TextSpan(
-                          text: _selectedUrl,
+                          text: _urlMap[_selectedUrl],
                           style: Theme.of(context).textTheme.bodyText1!.copyWith(
                             color: Colors.blue,
                             decoration: TextDecoration.underline,
@@ -197,18 +250,20 @@ class _UrlLauncherState extends State<UrlLauncher> {
     );
   }
 
-  Future<void> _launchUrl(String url) async {
+  void _launchUrl(String url) async {
     if (await canLaunch(url)) {
       if (!_isWebUrl)
         launch(url);
       else
         launch(
             url,
-          forceSafariVC: _forceWebViewOrSafariVC,
-          forceWebView: _forceWebViewOrSafariVC,
+          forceSafariVC: _forceSafarieVC,
+          forceWebView: _forceWebView,
           enableJavaScript: _javaScriptEnabled,
           enableDomStorage: _enableDomStorage,
-          universalLinksOnly: _tryWithUniversalLinksOnly,
+          universalLinksOnly: _universalLinksOnly,
+          webOnlyWindowName: _webOnlyWindowName ? '_self' : '_blank',
+          statusBarBrightness: _statusBarBrigthness ? Brightness.dark : Brightness.light,
           headers: (_sendHeaderInfos) ? _headers : {}
         );
     } else {

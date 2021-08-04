@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 class SettingList extends StatelessWidget {
   final List<Widget> children;
-  double height;
+  final double height;
 
   SettingList({required this.children, this.height = 96}) {
     children.add(

@@ -132,8 +132,7 @@ class _ConvexBottomBarMainState extends State<ConvexBottomBarMain> {
             _onValueChanged(newValue);
           },
           value: _tabstyle.name,
-          values: TabStyle.values.map((e) => e.name).toList(),
-          negate: false,
+          values: TabStyle.values.map((e) => e.name).toList()
         ),
       ),
       SizedBox(

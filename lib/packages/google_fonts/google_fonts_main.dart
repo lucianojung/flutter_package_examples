@@ -56,8 +56,7 @@ class _GoogleFontsMainState extends State<GoogleFontsMain> {
                     values: _categoryMap.values,
                     onChangedCallback: (newValue) {
                       onValueChanged(newValue as String);
-                    },
-                    negate: false),
+                    }),
                 Align(
                   alignment: Alignment.centerLeft,
                   heightFactor: 1.5,

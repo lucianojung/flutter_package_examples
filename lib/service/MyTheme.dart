@@ -37,7 +37,7 @@ class MyTheme {
 
   static final darkTheme = ThemeData.dark().copyWith(
       primaryColor: _mainColor,
-      accentColor: Color(0xff92ded6),
+      accentColor: _secondaryColor,
       appBarTheme: _appBarTheme,
     );
 
