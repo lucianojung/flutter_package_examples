@@ -1,0 +1,23 @@
+{
+    "name": "package_examples",
+    "short_name": "package_examples",
+    "start_url": ".",
+    "display": "standalone",
+    "background_color": "#92ded6",
+    "theme_color": "#67bcb3",
+    "description": "This project is a Flutter app to demonstrate the usage of various packages published at pub.dev.",
+    "orientation": "portrait-primary",
+    "prefer_related_applications": false,
+    "icons": [
+        {
+            "src": "icons/Icon-192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "icons/Icon-512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}
