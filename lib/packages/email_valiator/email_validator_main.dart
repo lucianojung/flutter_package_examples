@@ -24,8 +24,7 @@ class _EmailValidatorMainState extends State<EmailValidatorMain> {
               child: TextField(
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    hintText: 'Enter a valid Email Adress'
-                ),
+                    hintText: 'Enter a valid Email Adress'),
                 onChanged: (value) => {
                   setState(() {
                     _isValid = EmailValidator.validate(value);
@@ -35,10 +34,14 @@ class _EmailValidatorMainState extends State<EmailValidatorMain> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text(_isValid ? 'Email is valid.' : 'Email is not valid.'),
+              child: Text(
+                _isValid ? 'Email is valid.' : 'Email is not valid.',
+                style: TextStyle(color: _isValid ? Colors.green : Colors.red),
+              ),
             ),
           ]),
-          PackageWeblinkView('email_validator 2.0.1', 'https://pub.dev/packages/email_validator'),
+          PackageWeblinkView('email_validator 2.0.1',
+              'https://pub.dev/packages/email_validator'),
         ],
       ),
     );
