@@ -36,36 +36,33 @@ class MaterialDropdownView extends StatelessWidget {
           ),
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 8.0),
-          child: Row(
-            children: [
-              SizedBox(
-                child: MouseRegion(
-                  cursor: SystemMouseCursors.click,
-                  child: Container(
-                    height: 40,
-                    padding: const EdgeInsets.only(left: 15.0, right: 10.0),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(32.0),
-                        border: Border.all()),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton(
-                          value: this.value,
-                          items: this
-                              .values
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                          onChanged: (newValue) {
-                            this.onChangedCallback(newValue);
-                          }),
-                    ),
-                  ),
+          child: Align(
+            alignment: Alignment.centerLeft,
+            child: Container(
+              height: 40,
+              padding: const EdgeInsets.only(left: 15.0, right: 10.0),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(32.0),
+                  border: Border.all()),
+              child: MouseRegion(
+                cursor: SystemMouseCursors.click,
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton(
+                      value: this.value,
+                      items: this
+                          .values
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                      onChanged: (newValue) {
+                        this.onChangedCallback(newValue);
+                      }),
                 ),
               ),
-            ],
+            ),
           ),
         ),
       ],
