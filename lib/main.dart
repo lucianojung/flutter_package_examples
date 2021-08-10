@@ -81,7 +81,7 @@ class _HomeViewState extends State<HomeView> {
                 leading: Icon(Icons.assistant),
                 trailing: Icon(Icons.launch),
                 title: Text('Upcoming'),
-                subtitle: Text('Url Launcher, Google Fonts, ...'),
+                subtitle: Text('Google Fonts, Crypto, ...'),
                 onTap: () {
                   setState(() {
                     _launchUrl('https://lucianojung.medium.com/');
