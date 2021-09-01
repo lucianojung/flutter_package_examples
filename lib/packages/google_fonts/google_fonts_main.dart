@@ -18,7 +18,7 @@ class GoogleFontsMain extends StatefulWidget {
 
 class _GoogleFontsMainState extends State<GoogleFontsMain> {
   String _selectedCategory = 'SansSerif';
-  int _displayCount = 10;
+  int _displayCount = 6;
   final _myController = TextEditingController();
   HashMap<String, Category> _googleFontMap = getGoogleFontMap();
   late List<String> _filteredFontList;
@@ -47,101 +47,74 @@ class _GoogleFontsMainState extends State<GoogleFontsMain> {
         padding: const EdgeInsets.all(16.0),
         child: Stack(
           children: [
-            SettingList(
-              children: <Widget>[
-                MaterialDropdownView(
-                    title: 'Select a font category',
-                    subtitle: '',
-                    value: _selectedCategory,
-                    values: _categoryMap.values,
-                    onChangedCallback: (newValue) {
-                      onValueChanged(newValue as String);
-                    }),
-                Align(
-                  alignment: Alignment.centerLeft,
-                  heightFactor: 1.5,
-                  child: Text('Sentence',
-                      style: Theme.of(context).textTheme.headline6),
-                ),
-                TextField(
-                  cursorColor: Theme.of(context).primaryColor,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(4))),
-                    hintText: 'Type something',
-                    focusColor: Theme.of(context).primaryColor,
-                    hoverColor: Theme.of(context).accentColor.withAlpha(50),
-                    filled: true,
-                    focusedBorder: OutlineInputBorder(
-                        borderSide:
-                            BorderSide(color: Theme.of(context).primaryColor)),
+            NotificationListener<ScrollEndNotification>(
+              onNotification: (scrollEnd) {
+                var metrics = scrollEnd.metrics;
+                if (metrics.atEdge) {
+                  if (metrics.pixels != 0) {
+                    setState(() {
+                      _displayCount += 2;
+                    });
+                  }
+                }
+                return true;
+              },
+              child: SettingList(
+                children: <Widget>[
+                  MaterialDropdownView(
+                      title: 'Select a font category',
+                      subtitle: '',
+                      value: _selectedCategory,
+                      values: _categoryMap.values,
+                      onChangedCallback: (newValue) {
+                        onValueChanged(newValue as String);
+                      }),
+                  Align(
+                    alignment: Alignment.centerLeft,
+                    heightFactor: 1.5,
+                    child: Text('Sentence',
+                        style: Theme.of(context).textTheme.headline6),
                   ),
-                  controller: _myController,
-                  onChanged: (value) => {
-                    setState(() {}),
-                  },
-                ),
-                SizedBox(
-                  height: 32,
-                ),
-                Column(
-                  children: [
-                    for (int i = 0;
-                        i < min(_filteredFontList.length, _displayCount);
-                        i++)
-                      SizedBox(
-                        child: Card(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(6.0),
-                          ),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: ListTile(
-                              title: Text(_filteredFontList[i]),
-                              subtitle: Text(
-                                _myController.text,
-                                style: GoogleFonts.getFont(_filteredFontList[i])
-                                    .copyWith(fontSize: 32),
-                              ),
-                              trailing: IconButton(
-                                icon: Icon(Icons.copy),
-                                tooltip: 'copy font name',
-                                onPressed: () {
-                                  Clipboard.setData(ClipboardData(
-                                      text: _filteredFontList[i]));
-                                },
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                  ],
-                ),
-                if (_displayCount < _filteredFontList.length)
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: ElevatedButton(
-                      child: Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'load more',
-                          style: TextStyle(fontWeight: FontWeight.bold),
-                        ),
-                      ),
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all(
-                            Theme.of(context).accentColor),
-                        foregroundColor:
-                            MaterialStateProperty.all(Colors.black87),
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _displayCount += 6;
-                        });
-                      },
+                  TextField(
+                    cursorColor: Theme.of(context).primaryColor,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(4))),
+                      hintText: 'Type something',
+                      focusColor: Theme.of(context).primaryColor,
+                      hoverColor: Theme.of(context).accentColor.withAlpha(50),
+                      filled: true,
+                      focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Theme.of(context).primaryColor)),
                     ),
-                  )
-              ],
+                    controller: _myController,
+                    onChanged: (value) => {
+                      setState(() {}),
+                    },
+                  ),
+                  SizedBox(
+                    height: 32,
+                  ),
+                  Column(
+                    children: [
+                      for (int i = 0;
+                          i < min(_filteredFontList.length, _displayCount);
+                          i++)
+                        SizedBox(
+                          child: Card(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(6.0),
+                            ),
+                            child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: FontListTile(_filteredFontList[i])),
+                          ),
+                        ),
+                    ],
+                  ),
+                ],
+              ),
             ),
             PackageWeblinkView(_googleFontVersion, _url),
           ],
@@ -153,7 +126,7 @@ class _GoogleFontsMainState extends State<GoogleFontsMain> {
   void onValueChanged(String newValue) {
     setState(() {
       _selectedCategory = newValue;
-      _displayCount = 15;
+      _displayCount = 6;
       filterFontMap();
     });
   }
@@ -163,6 +136,31 @@ class _GoogleFontsMainState extends State<GoogleFontsMain> {
         .where((element) => _categoryMap[element.value] == _selectedCategory)
         .map((e) => e.key)
         .toList();
+  }
+
+  TextStyle getFont(String fontName) {
+    return GoogleFonts.getFont(fontName).copyWith(fontSize: 32);
+  }
+
+  FontListTile(String fontName) {
+    return ListTile(
+            title: Text(fontName),
+            subtitle: Text(
+              _myController.text,
+              style: getFont(fontName).copyWith(fontSize: 32),
+            ),
+            trailing: IconButton(
+              icon: Icon(Icons.copy),
+              tooltip: 'copy font name',
+              onPressed: () {
+                Clipboard.setData(ClipboardData(text: fontName));
+                final snackBar = SnackBar(
+                    content: Text('Copied $fontName to clipboard'),
+                    backgroundColor: Theme.of(context).primaryColor);
+                ScaffoldMessenger.of(context).showSnackBar(snackBar);
+              },
+            ),
+          );
   }
 
   static HashMap<String, Category> getGoogleFontMap() {
