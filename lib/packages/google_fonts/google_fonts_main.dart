@@ -19,9 +19,8 @@ class GoogleFontsMain extends StatefulWidget {
 class _GoogleFontsMainState extends State<GoogleFontsMain> {
   String _selectedCategory = 'SansSerif';
   int _displayCount = 6;
-  final _myController = TextEditingController();
-  HashMap<String, Category> _googleFontMap = getGoogleFontMap();
-  late List<String> _filteredFontList;
+  final _myController = TextEditingController(text: 'The quick brown fox jumps over a lazy dog.');
+  late List<String> _filteredFontList = googleFontMap.keys.toList();
   HashMap<Category, String> _categoryMap = HashMap.of({
     Category.SANSSERIF: 'SansSerif',
     Category.SERIF: 'Serif',
@@ -31,13 +30,6 @@ class _GoogleFontsMainState extends State<GoogleFontsMain> {
   });
   String _url = 'https://pub.dev/packages/google_fonts';
   String _googleFontVersion = '2.1.0';
-
-  @override
-  void initState() {
-    _filteredFontList = _googleFontMap.keys.toList();
-    _myController.text = 'The quick brown fox jumps over a lazy dog.';
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -82,11 +74,12 @@ class _GoogleFontsMainState extends State<GoogleFontsMain> {
                           borderRadius: BorderRadius.all(Radius.circular(4))),
                       hintText: 'Type something',
                       focusColor: Theme.of(context).primaryColor,
-                      hoverColor: Theme.of(context).accentColor.withAlpha(50),
+                      hoverColor:
+                          Theme.of(context).colorScheme.secondary.withAlpha(50),
                       filled: true,
                       focusedBorder: OutlineInputBorder(
-                          borderSide:
-                              BorderSide(color: Theme.of(context).primaryColor)),
+                          borderSide: BorderSide(
+                              color: Theme.of(context).primaryColor)),
                     ),
                     controller: _myController,
                     onChanged: (value) => {
@@ -101,16 +94,7 @@ class _GoogleFontsMainState extends State<GoogleFontsMain> {
                       for (int i = 0;
                           i < min(_filteredFontList.length, _displayCount);
                           i++)
-                        SizedBox(
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(6.0),
-                            ),
-                            child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: FontListTile(_filteredFontList[i])),
-                          ),
-                        ),
+                        FontListTile(_filteredFontList[i]),
                     ],
                   ),
                 ],
@@ -118,6 +102,26 @@ class _GoogleFontsMainState extends State<GoogleFontsMain> {
             ),
             PackageWeblinkView(_googleFontVersion, _url),
           ],
+        ),
+      ),
+    );
+  }
+
+  FontListTile(String fontName) {
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: ListTile(
+          title: Text(fontName),
+          subtitle: Text(
+            _myController.text,
+            style: GoogleFonts.getFont(fontName).copyWith(fontSize: 32),
+          ),
+          trailing: IconButton(
+              icon: Icon(Icons.copy),
+              tooltip: 'copy font name',
+              onPressed: () => onCopyPressed(fontName)
+          ),
         ),
       ),
     );
@@ -132,39 +136,22 @@ class _GoogleFontsMainState extends State<GoogleFontsMain> {
   }
 
   void filterFontMap() {
-    _filteredFontList = _googleFontMap.entries
+    _filteredFontList = googleFontMap.entries
         .where((element) => _categoryMap[element.value] == _selectedCategory)
         .map((e) => e.key)
         .toList();
   }
 
-  TextStyle getFont(String fontName) {
-    return GoogleFonts.getFont(fontName).copyWith(fontSize: 32);
+  void onCopyPressed(String fontName) {
+    Clipboard.setData(ClipboardData(text: fontName));
+    final snackBar = SnackBar(
+        content: Text('Copied $fontName to clipboard'),
+        backgroundColor: Theme.of(context).primaryColor);
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
   }
 
-  FontListTile(String fontName) {
-    return ListTile(
-            title: Text(fontName),
-            subtitle: Text(
-              _myController.text,
-              style: getFont(fontName).copyWith(fontSize: 32),
-            ),
-            trailing: IconButton(
-              icon: Icon(Icons.copy),
-              tooltip: 'copy font name',
-              onPressed: () {
-                Clipboard.setData(ClipboardData(text: fontName));
-                final snackBar = SnackBar(
-                    content: Text('Copied $fontName to clipboard'),
-                    backgroundColor: Theme.of(context).primaryColor);
-                ScaffoldMessenger.of(context).showSnackBar(snackBar);
-              },
-            ),
-          );
-  }
-
-  static HashMap<String, Category> getGoogleFontMap() {
-    return HashMap.of({
+  HashMap<String, Category> googleFontMap =
+    HashMap.of({
       'ABeeZee': Category.SANSSERIF,
       'Abel': Category.SANSSERIF,
       'Abhaya Libre': Category.SERIF,
@@ -419,7 +406,6 @@ class _GoogleFontsMainState extends State<GoogleFontsMain> {
       'VT323': Category.MONOSPACE,
       'Xanh Mono': Category.MONOSPACE,
     });
-  }
 }
 
 enum Category { SANSSERIF, SERIF, DISPLAY, HANDWRITING, MONOSPACE }
