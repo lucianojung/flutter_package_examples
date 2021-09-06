@@ -43,7 +43,7 @@ class _HomeViewState extends State<HomeView> {
         Icons.calendar_today, 'Date Format', '2.0.2', '/date_format'),
     CustomListTile(Icons.launch, 'Url Launcher', '6.0.9', '/url_launcher'),
     CustomListTile(Icons.font_download_outlined, 'Google Fonts', '2.1.0', '/google_fonts'),
-    // CustomListTile(Icons.lock_outline, 'Crypto', '3.0.1', '/crypto'),
+    CustomListTile(Icons.lock_outline, 'Crypto', '3.0.1', '/crypto'),
   ];
 
   @override
@@ -81,7 +81,7 @@ class _HomeViewState extends State<HomeView> {
                 leading: Icon(Icons.assistant),
                 trailing: Icon(Icons.launch),
                 title: Text('Upcoming'),
-                subtitle: Text('Crypto, ...'),
+                subtitle: Text('...'),
                 onTap: () {
                   setState(() {
                     _launchUrl('https://lucianojung.medium.com/');

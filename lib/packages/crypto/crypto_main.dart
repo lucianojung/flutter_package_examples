@@ -143,6 +143,13 @@ class _CryptoState extends State<Crypto> {
                                     Clipboard.setData(ClipboardData(
                                         text: _hashValue(algorithm.key)
                                             .toString()));
+                                    final snackBar = SnackBar(
+                                        content: Text(
+                                            'Copied ${_hashValue(algorithm.key).toString()} to clipboard'),
+                                        backgroundColor:
+                                            Theme.of(context).primaryColor);
+                                    ScaffoldMessenger.of(context)
+                                        .showSnackBar(snackBar);
                                   },
                                 ),
                               ),
