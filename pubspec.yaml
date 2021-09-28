@@ -37,6 +37,9 @@ dependencies:
   google_fonts: ^2.1.0
   provider: ^5.0.0
   crypto: ^3.0.1
+  audio_service: ^0.18.0
+  just_audio: ^0.9.12
+  flutter_tts: ^3.2.2
 
 dev_dependencies:
   flutter_test:

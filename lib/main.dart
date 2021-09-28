@@ -1,12 +1,25 @@
+import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
+import 'package:package_examples/packages/audio_service/audio_handler_service.dart';
+import 'package:package_examples/packages/audio_service/audio_service_main.dart';
 import 'package:package_examples/service/MyTheme.dart';
 import 'package:package_examples/service/route_generator.dart';
 import 'package:package_examples/shared/appbar.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-void main() async {
-  runApp(MyApp());
+import 'dart:async';
+
+Future<void> main() async {
+  AudioHandler _audioHandler = await AudioService.init(
+    builder: () => AudioPlayerHandler(),
+    config: const AudioServiceConfig(
+      androidNotificationChannelId: 'com.ryanheise.myapp.channel.audio',
+      androidNotificationChannelName: 'Audio playback',
+      androidNotificationOngoing: true,
+    ),
+  );
+  runApp(AudioHandlerService(key: GlobalKey(), audioHandler: _audioHandler, child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -44,6 +57,7 @@ class _HomeViewState extends State<HomeView> {
     CustomListTile(Icons.launch, 'Url Launcher', '6.0.9', '/url_launcher'),
     CustomListTile(Icons.font_download_outlined, 'Google Fonts', '2.1.0', '/google_fonts'),
     // CustomListTile(Icons.lock_outline, 'Crypto', '3.0.1', '/crypto'),
+    CustomListTile(Icons.audiotrack_outlined, 'Audio Service', '0.18.0', '/audio_service'),
   ];
 
   @override

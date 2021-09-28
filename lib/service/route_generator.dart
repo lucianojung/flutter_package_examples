@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:package_examples/packages/audio_service/audio_service_main.dart';
 import 'package:package_examples/packages/convex_bottom_bar/convex_bottom_bar_main.dart';
 import 'package:package_examples/packages/crypto/crypto_main.dart';
 import 'package:package_examples/packages/date_format/date_format_main.dart';
@@ -32,6 +33,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => GoogleFontsMain());
       case '/crypto':
         return MaterialPageRoute(builder: (_) => Crypto());
+      case '/audio_service':
+        return MaterialPageRoute(builder: (_) => AudioServiceMain());
       default:
         return _errorRoute(message: 'wrong routing name');
     }
