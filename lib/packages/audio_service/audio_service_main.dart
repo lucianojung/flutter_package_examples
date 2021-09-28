@@ -27,7 +27,15 @@ class AudioServiceMain extends StatelessWidget {
               stream: _audioHandler.mediaItem,
               builder: (context, snapshot) {
                 final mediaItem = snapshot.data;
-                return Text(mediaItem?.title ?? '');
+                return FadeInImage(image: NetworkImage(mediaItem?.artUri.toString() ?? ''), placeholder: AssetImage(''),);
+              },
+            ),
+            // Show media item title
+            StreamBuilder<MediaItem?>(
+              stream: _audioHandler.mediaItem,
+              builder: (context, snapshot) {
+                final mediaItem = snapshot.data;
+                return Text('${mediaItem?.album} - ${mediaItem?.title}');
               },
             ),
             // Play/pause/stop buttons.
@@ -93,7 +101,7 @@ class AudioServiceMain extends StatelessWidget {
 
   IconButton _button(IconData iconData, VoidCallback onPressed) => IconButton(
     icon: Icon(iconData),
-    iconSize: 64.0,
+    iconSize: 32.0,
     onPressed: onPressed,
   );
 }
