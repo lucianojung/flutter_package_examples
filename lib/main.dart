@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:package_examples/service/MyTheme.dart';
 import 'package:package_examples/service/route_generator.dart';
 import 'package:package_examples/shared/appbar.dart';
+import 'package:package_examples/shared/material_dropdown_view.dart';
 import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -32,19 +33,28 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
-  List<CustomListTile> listTileList = [
+  String orderValue = SortingOrder.Newest.name;
+
+  List<CustomListTile> listTileList = <CustomListTile>[
     CustomListTile(
-        Icons.email_outlined, 'Email Validator', '2.0.1', '/email_validator'),
+        Icons.email_outlined, 'Email Validator', '2.0.1', '/email_validator', 0),
     CustomListTile(Icons.facebook, 'Flutter Signin Button', '2.0.0',
-        '/flutter_signin_button'),
+        '/flutter_signin_button', 1),
+    CustomListTile(Icons.view_agenda_outlined, 'Convex BottomAppBar', '3.0.0',
+        '/convex_bottom_bar', 2),
     CustomListTile(
-        Icons.view_agenda_outlined, 'Convex BottomAppBar', '3.0.0', '/convex_bottom_bar'),
+        Icons.calendar_today, 'Date Format', '2.0.2', '/date_format', 3),
+    CustomListTile(Icons.launch, 'Url Launcher', '6.0.9', '/url_launcher', 4),
     CustomListTile(
-        Icons.calendar_today, 'Date Format', '2.0.2', '/date_format'),
-    CustomListTile(Icons.launch, 'Url Launcher', '6.0.9', '/url_launcher'),
-    CustomListTile(Icons.font_download_outlined, 'Google Fonts', '2.1.0', '/google_fonts'),
-    CustomListTile(Icons.lock_outline, 'Crypto', '3.0.1', '/crypto'),
+        Icons.font_download_outlined, 'Google Fonts', '2.1.0', '/google_fonts', 5),
+    CustomListTile(Icons.lock_outline, 'Crypto', '3.0.1', '/crypto', 6),
   ];
+
+  @override
+  void initState() {
+    _onOrderValueChanged(SortingOrder.Newest.name);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -61,6 +71,14 @@ class _HomeViewState extends State<HomeView> {
           // width: 1280,
           child: Column(
             children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0, top: 8.0),
+                child: MaterialDropdownView(
+                  value: orderValue,
+                  values: SortingOrder.Alphabetically.names(),
+                  onChangedCallback: (newValue) => _onOrderValueChanged(newValue),
+                ),
+              ),
               for (CustomListTile listTile in listTileList)
                 ListTile(
                   leading: Icon(listTile.iconData),
@@ -102,6 +120,21 @@ class _HomeViewState extends State<HomeView> {
       throw 'Could not launch $url';
     }
   }
+
+  void _onOrderValueChanged(String newValue) {
+    if(newValue == SortingOrder.Newest.name) {
+      listTileList.sort((a, b) => b.order.compareTo(a.order));
+    } else if (newValue == SortingOrder.Oldest.name) {
+      listTileList.sort((a, b) => a.order.compareTo(b.order));
+    } else if (newValue == SortingOrder.Alphabetically.name) {
+      listTileList.sort((a, b) => a.title.compareTo(b.title));
+    } else if (newValue == SortingOrder.HighestVersion.name) {
+      listTileList.sort((a, b) => b.version.compareTo(a.version));
+    }
+    setState(() {
+      orderValue = newValue;
+    });
+  }
 }
 
 class CustomListTile {
@@ -109,6 +142,32 @@ class CustomListTile {
   String title;
   String version;
   String route;
+  int order;
 
-  CustomListTile(this.iconData, this.title, this.version, this.route);
+  CustomListTile(this.iconData, this.title, this.version, this.route, this.order);
+}
+
+enum SortingOrder { Alphabetically, Newest, Oldest, HighestVersion }
+
+extension SortingOrderExtension on SortingOrder {
+  String get name {
+    switch (this) {
+      case SortingOrder.Alphabetically:
+        return 'Alphabetically';
+      case SortingOrder.Newest:
+        return 'Newest package first';
+      case SortingOrder.Oldest:
+        return 'Oldest package first';
+      case SortingOrder.HighestVersion:
+        return 'Highest version first';
+    }
+  }
+
+  List<String> names() {
+    List<String> values = [];
+    SortingOrder.values.forEach((element) {
+      values.add(element.name);
+    });
+    return values;
+  }
 }
