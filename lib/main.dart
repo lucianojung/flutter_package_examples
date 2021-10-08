@@ -69,44 +69,46 @@ class _HomeViewState extends State<HomeView> {
       child: Center(
         child: Container(
           // width: 1280,
-          child: Column(
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.only(left: 8.0, top: 8.0),
-                child: MaterialDropdownView(
-                  value: orderValue,
-                  values: SortingOrder.Alphabetically.names(),
-                  onChangedCallback: (newValue) => _onOrderValueChanged(newValue),
+          child: SingleChildScrollView(
+            child: Column(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0, top: 8.0),
+                  child: MaterialDropdownView(
+                    value: orderValue,
+                    values: SortingOrder.Alphabetically.names(),
+                    onChangedCallback: (newValue) => _onOrderValueChanged(newValue),
+                  ),
                 ),
-              ),
-              for (CustomListTile listTile in listTileList)
+                for (CustomListTile listTile in listTileList)
+                  ListTile(
+                    leading: Icon(listTile.iconData),
+                    title: Text(listTile.title),
+                    subtitle: Text('Version: ${listTile.version}'),
+                    onTap: () {
+                      setState(() {
+                        Navigator.of(context).pushNamed(listTile.route);
+                      });
+                    },
+                    trailing: Icon(Icons.arrow_forward),
+                  ),
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                  child: Divider(),
+                ),
                 ListTile(
-                  leading: Icon(listTile.iconData),
-                  title: Text(listTile.title),
-                  subtitle: Text('Version: ${listTile.version}'),
+                  leading: Icon(Icons.assistant),
+                  trailing: Icon(Icons.launch),
+                  title: Text('Upcoming'),
+                  subtitle: Text('...'),
                   onTap: () {
                     setState(() {
-                      Navigator.of(context).pushNamed(listTile.route);
+                      _launchUrl('https://lucianojung.medium.com/');
                     });
                   },
-                  trailing: Icon(Icons.arrow_forward),
                 ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                child: Divider(),
-              ),
-              ListTile(
-                leading: Icon(Icons.assistant),
-                trailing: Icon(Icons.launch),
-                title: Text('Upcoming'),
-                subtitle: Text('...'),
-                onTap: () {
-                  setState(() {
-                    _launchUrl('https://lucianojung.medium.com/');
-                  });
-                },
-              ),
-            ],
+              ],
+            ),
           ),
         ),
       ),
