@@ -4,6 +4,7 @@ import 'package:package_examples/packages/convex_bottom_bar/convex_bottom_bar_ma
 import 'package:package_examples/packages/crypto/crypto_main.dart';
 import 'package:package_examples/packages/date_format/date_format_main.dart';
 import 'package:package_examples/packages/email_valiator/email_validator_main.dart';
+import 'package:package_examples/packages/firebase_auth/firebase_auth_main.dart';
 import 'package:package_examples/packages/flutter_signin_button/flutter_signin_button.dart';
 import 'package:package_examples/packages/google_fonts/google_fonts_main.dart';
 import 'package:package_examples/packages/url_launcher/url_launcher_main.dart';
@@ -30,8 +31,8 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => DateFormatMain());
       case '/google_fonts':
         return MaterialPageRoute(builder: (_) => GoogleFontsMain());
-      case '/crypto':
-        return MaterialPageRoute(builder: (_) => Crypto());
+      case '/firebase_auth':
+        return MaterialPageRoute(builder: (_) => FirebaseAuthMain());
       default:
         return _errorRoute(message: 'wrong routing name');
     }

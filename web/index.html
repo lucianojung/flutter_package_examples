@@ -28,6 +28,22 @@
   <link rel="manifest" href="manifest.json">
 </head>
 <body>
+  <!--To run Firebase-->
+  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>
+  <script src="main.dart.js" type="application/javascript"></script>
+  <!-- Firebase Configuration -->
+  <script>
+      var firebaseConfig = {
+        apiKey: "AIzaSyDcuH4V6IQAx9dOChgwZBfhrp7ArR6I0GQ",
+        authDomain: "flutter-packages-c22a0.firebaseapp.com",
+        projectId: "flutter-packages-c22a0",
+        storageBucket: "flutter-packages-c22a0.appspot.com",
+        messagingSenderId: "756646396281",
+        appId: "1:756646396281:web:b2950f420c0a57291aafa8"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
   <!-- This script installs service_worker.js to provide PWA functionality to
        application. For more information, see:
        https://developers.google.com/web/fundamentals/primers/service-workers -->

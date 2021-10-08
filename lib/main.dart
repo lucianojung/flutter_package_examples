@@ -1,3 +1,5 @@
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:package_examples/service/MyTheme.dart';
 import 'package:package_examples/service/route_generator.dart';
@@ -7,6 +9,8 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MyApp());
 }
 
@@ -48,6 +52,7 @@ class _HomeViewState extends State<HomeView> {
     CustomListTile(
         Icons.font_download_outlined, 'Google Fonts', '2.1.0', '/google_fonts', 5),
     CustomListTile(Icons.lock_outline, 'Crypto', '3.0.1', '/crypto', 6),
+    CustomListTile(Icons.local_fire_department, 'Firebase Auth', '3.1.3', '/firebase_auth', 7),
   ];
 
   @override
