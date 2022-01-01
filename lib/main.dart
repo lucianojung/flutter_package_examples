@@ -45,10 +45,10 @@ class _HomeViewState extends State<HomeView> {
     CustomListTile(Icons.view_agenda_outlined, 'Convex BottomAppBar', '3.0.0',
         '/convex_bottom_bar', 2),
     CustomListTile(
-        Icons.calendar_today, 'Date Format', '2.0.2', '/date_format', 3),
-    CustomListTile(Icons.launch, 'Url Launcher', '6.0.9', '/url_launcher', 4),
+        Icons.calendar_today, 'Date Format', '2.0.4', '/date_format', 3),
+    CustomListTile(Icons.launch, 'Url Launcher', '6.0.17', '/url_launcher', 4),
     CustomListTile(
-        Icons.font_download_outlined, 'Google Fonts', '2.1.0', '/google_fonts', 5),
+        Icons.font_download_outlined, 'Google Fonts', '2.2.0', '/google_fonts', 5),
     CustomListTile(Icons.lock_outline, 'Crypto', '3.0.1', '/crypto', 6),
   ];
 

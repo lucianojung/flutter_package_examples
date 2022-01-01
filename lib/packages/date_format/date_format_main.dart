@@ -3,12 +3,10 @@ import 'dart:async';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:date_format/date_format.dart';
-import 'package:package_examples/service/MyTheme.dart';
 import 'package:package_examples/shared/appbar.dart';
 import 'package:package_examples/shared/material_dropdown_view.dart';
 import 'package:package_examples/shared/package_weblink_view.dart';
 import 'package:package_examples/shared/setting_list.dart';
-import 'package:provider/provider.dart';
 
 class DateFormatMain extends StatefulWidget {
   @override
@@ -198,7 +196,7 @@ class _DateFormatMainState extends State<DateFormatMain> {
                     style: Theme.of(context).textTheme.headline6,
                   ),
                 ),
-                PackageWeblinkView('date_format 2.0.2',
+                PackageWeblinkView('date_format 2.0.4',
                     'https://pub.dev/packages/date_format'),
               ],
             )
