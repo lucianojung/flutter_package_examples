@@ -58,7 +58,7 @@ class _CryptoState extends State<Crypto> {
                     alignment: Alignment.centerLeft,
                     heightFactor: 1.5,
                     child: Text('Sentence',
-                        style: Theme.of(context).textTheme.headline6),
+                        style: Theme.of(context).textTheme.titleLarge),
                   ),
                   TextField(
                     cursorColor: Theme.of(context).primaryColor,
@@ -67,7 +67,7 @@ class _CryptoState extends State<Crypto> {
                           borderRadius: BorderRadius.all(Radius.circular(4))),
                       hintText: 'Type something',
                       focusColor: Theme.of(context).primaryColor,
-                      hoverColor: Theme.of(context).accentColor.withAlpha(50),
+                      hoverColor: Theme.of(context).colorScheme.secondary.withAlpha(50),
                       filled: true,
                       focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
@@ -96,7 +96,7 @@ class _CryptoState extends State<Crypto> {
                       alignment: Alignment.centerLeft,
                       heightFactor: 1.5,
                       child: Text('Key',
-                          style: Theme.of(context).textTheme.headline6),
+                          style: Theme.of(context).textTheme.titleLarge),
                     ),
                   if (_withHmac)
                     TextField(
@@ -106,7 +106,7 @@ class _CryptoState extends State<Crypto> {
                             borderRadius: BorderRadius.all(Radius.circular(4))),
                         hintText: 'Type something',
                         focusColor: Theme.of(context).primaryColor,
-                        hoverColor: Theme.of(context).accentColor.withAlpha(50),
+                        hoverColor: Theme.of(context).colorScheme.secondary.withAlpha(50),
                         filled: true,
                         focusedBorder: OutlineInputBorder(
                             borderSide: BorderSide(

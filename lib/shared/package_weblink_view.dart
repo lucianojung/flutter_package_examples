@@ -18,7 +18,7 @@ class PackageWeblinkView extends StatelessWidget {
       child: SizedBox(
         width: 400,
         child: GestureDetector(
-          onTap: () => _launchUrl(_url),
+          onTap: () => _launchUrl(Uri.parse(_url)),
           child: MouseRegion(
             cursor: SystemMouseCursors.click,
             child: AbsorbPointer(
@@ -48,11 +48,9 @@ class PackageWeblinkView extends StatelessWidget {
     );
   }
 
-  Future<void> _launchUrl(String url) async {
-    if (await canLaunch(url)) {
-      await launch(url);
-    } else {
-      throw 'Could not launch $url';
+  Future<void> _launchUrl(Uri _url) async {
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
     }
   }
 }

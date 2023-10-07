@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 class ThemeProvider extends ChangeNotifier {
   ThemeMode themeMode = ThemeMode.system;
+
   bool get isDarkMode => themeMode == ThemeMode.dark;
 
   void toggleTheme(bool isDarkMode) {
@@ -18,38 +19,38 @@ class MyTheme {
   static TextStyle _black87TextStyle = TextStyle(color: Colors.black87);
 
   static final lightTheme = ThemeData.light().copyWith(
-      primaryColor: _mainColor,
-      accentColor: _secondaryColor,
-      textTheme: TextTheme(
-        headline1: _blackTextStyle,
-        headline2: _blackTextStyle,
-        headline3: _blackTextStyle,
-        headline4: _blackTextStyle,
-        headline5: _blackTextStyle,
-        headline6: _blackTextStyle,
-        bodyText1: _black54TextStyle,
-        bodyText2: _black54TextStyle,
-        subtitle1: _black87TextStyle,
-        subtitle2: _black87TextStyle,
-      ),
-      appBarTheme: _appBarTheme,
-    );
+    primaryColor: _mainColor,
+    textTheme: TextTheme(
+      displayLarge: _blackTextStyle,
+      displayMedium: _blackTextStyle,
+      displaySmall: _blackTextStyle,
+      headlineMedium: _blackTextStyle,
+      headlineSmall: _blackTextStyle,
+      titleLarge: _blackTextStyle,
+      bodyLarge: _black54TextStyle,
+      bodyMedium: _black54TextStyle,
+      titleMedium: _black87TextStyle,
+      titleSmall: _black87TextStyle,
+    ),
+    appBarTheme: _appBarTheme,
+    colorScheme: ColorScheme.fromSwatch().copyWith(secondary: _secondaryColor),
+  );
 
   static final darkTheme = ThemeData.dark().copyWith(
-      primaryColor: _mainColor,
-      accentColor: _secondaryColor,
-      appBarTheme: _appBarTheme,
-    );
+    primaryColor: _mainColor,
+    appBarTheme: _appBarTheme,
+    colorScheme: ColorScheme.fromSwatch().copyWith(secondary: _secondaryColor),
+  );
 
   static final _appBarTheme = AppBarTheme(
-        foregroundColor: Colors.white,
-        shadowColor: _mainColor,
-        color: _mainColor,
-        textTheme: TextTheme(
-            headline6: TextStyle(fontSize: 24.0, color: Colors.white)
-        ),
-        iconTheme: IconThemeData(
-            color: Colors.white
-        )
-    );
+      foregroundColor: Colors.white,
+      shadowColor: _mainColor,
+      color: _mainColor,
+      iconTheme: IconThemeData(color: Colors.white),
+      toolbarTextStyle:
+          TextTheme(titleLarge: TextStyle(fontSize: 24.0, color: Colors.white))
+              .bodyMedium,
+      titleTextStyle:
+          TextTheme(titleLarge: TextStyle(fontSize: 24.0, color: Colors.white))
+              .titleLarge);
 }
