@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:package_examples/service/MyTheme.dart';
 import 'package:package_examples/service/route_generator.dart';
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
         final themeProvider = Provider.of<ThemeProvider>(context);
 
         return MaterialApp(
+          debugShowCheckedModeBanner: false,
           themeMode: themeProvider.themeMode,
           theme: MyTheme.lightTheme,
           darkTheme: MyTheme.darkTheme,
@@ -43,10 +45,10 @@ class _HomeViewState extends State<HomeView> {
     CustomListTile(Icons.view_agenda_outlined, 'Convex BottomAppBar', '3.0.0',
         '/convex_bottom_bar', 2),
     CustomListTile(
-        Icons.calendar_today, 'Date Format', '2.0.2', '/date_format', 3),
-    CustomListTile(Icons.launch, 'Url Launcher', '6.0.9', '/url_launcher', 4),
+        Icons.calendar_today, 'Date Format', '2.0.4', '/date_format', 3),
+    CustomListTile(Icons.launch, 'Url Launcher', '6.0.17', '/url_launcher', 4),
     CustomListTile(
-        Icons.font_download_outlined, 'Google Fonts', '2.1.0', '/google_fonts', 5),
+        Icons.font_download_outlined, 'Google Fonts', '2.2.0', '/google_fonts', 5),
     CustomListTile(Icons.lock_outline, 'Crypto', '3.0.1', '/crypto', 6),
   ];
 
@@ -66,49 +68,47 @@ class _HomeViewState extends State<HomeView> {
 
   Widget _body() {
     return SafeArea(
-      child: Center(
-        child: Container(
-          // width: 1280,
-          child: SingleChildScrollView(
-            child: Column(
-              children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(left: 8.0, top: 8.0),
-                  child: MaterialDropdownView(
-                    value: orderValue,
-                    values: SortingOrder.Alphabetically.names(),
-                    onChangedCallback: (newValue) => _onOrderValueChanged(newValue),
-                  ),
+      child: Container(
+        // width: 1280,
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0, top: 8.0),
+                child: MaterialDropdownView(
+                  value: orderValue,
+                  values: SortingOrder.Alphabetically.names(),
+                  onChangedCallback: (newValue) => _onOrderValueChanged(newValue),
                 ),
-                for (CustomListTile listTile in listTileList)
-                  ListTile(
-                    leading: Icon(listTile.iconData),
-                    title: Text(listTile.title),
-                    subtitle: Text('Version: ${listTile.version}'),
-                    onTap: () {
-                      setState(() {
-                        Navigator.of(context).pushNamed(listTile.route);
-                      });
-                    },
-                    trailing: Icon(Icons.arrow_forward),
-                  ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                  child: Divider(),
-                ),
+              ),
+              for (CustomListTile listTile in listTileList)
                 ListTile(
-                  leading: Icon(Icons.assistant),
-                  trailing: Icon(Icons.launch),
-                  title: Text('Upcoming'),
-                  subtitle: Text('...'),
+                  leading: Icon(listTile.iconData),
+                  title: Text(listTile.title),
+                  subtitle: Text('Version: ${listTile.version}'),
                   onTap: () {
                     setState(() {
-                      _launchUrl('https://lucianojung.medium.com/');
+                      Navigator.of(context).pushNamed(listTile.route);
                     });
                   },
+                  trailing: Icon(Icons.arrow_forward),
                 ),
-              ],
-            ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                child: Divider(),
+              ),
+              ListTile(
+                leading: Icon(Icons.assistant),
+                trailing: Icon(Icons.launch),
+                title: Text('Upcoming'),
+                subtitle: Text('...'),
+                onTap: () {
+                  setState(() {
+                    _launchUrl('https://lucianojung.medium.com/');
+                  });
+                },
+              ),
+            ],
           ),
         ),
       ),

@@ -29,7 +29,7 @@ class _GoogleFontsMainState extends State<GoogleFontsMain> {
     Category.MONOSPACE: 'Monospace'
   });
   String _url = 'https://pub.dev/packages/google_fonts';
-  String _googleFontVersion = '2.1.0';
+  String _googleFontVersion = '2.2.0';
 
   @override
   Widget build(BuildContext context) {
