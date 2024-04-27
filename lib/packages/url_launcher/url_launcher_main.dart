@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:package_examples/shared/appbar.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -70,7 +69,7 @@ class _UrlLauncherState extends State<UrlLauncher> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'Options',
-                          style: Theme.of(context).textTheme.headline6,
+                          style: Theme.of(context).textTheme.titleLarge,
                         ),
                       ),
                       Container(
@@ -78,7 +77,7 @@ class _UrlLauncherState extends State<UrlLauncher> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'For Android',
-                          style: Theme.of(context).textTheme.subtitle2,
+                          style: Theme.of(context).textTheme.titleSmall,
                         ),
                       ),
                       CheckboxListTile(
@@ -129,7 +128,7 @@ class _UrlLauncherState extends State<UrlLauncher> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'For iOS',
-                          style: Theme.of(context).textTheme.subtitle2,
+                          style: Theme.of(context).textTheme.titleSmall,
                         ),
                       ),
                       CheckboxListTile(
@@ -167,7 +166,7 @@ class _UrlLauncherState extends State<UrlLauncher> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'For Web',
-                          style: Theme.of(context).textTheme.subtitle2,
+                          style: Theme.of(context).textTheme.titleSmall,
                         ),
                       ),
                       CheckboxListTile(
@@ -233,7 +232,7 @@ class _UrlLauncherState extends State<UrlLauncher> {
                       subtitle: RichText(
                         text: TextSpan(
                           text: _urlMap[_selectedUrl],
-                          style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                          style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                             color: Colors.blue,
                             decoration: TextDecoration.underline,
                           ),

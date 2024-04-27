@@ -23,7 +23,7 @@ class MaterialDropdownView extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Text(
               this.title,
-              style: _themeData.textTheme.headline6!
+              style: _themeData.textTheme.titleLarge!
             ),
           ),
         if (this.subtitle != '')
@@ -31,7 +31,7 @@ class MaterialDropdownView extends StatelessWidget {
             alignment: Alignment.centerLeft,
             child: Text(
               this.subtitle,
-              style: _themeData.textTheme.subtitle1!,
+              style: _themeData.textTheme.titleMedium!,
             ),
           ),
         Padding(

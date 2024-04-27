@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:crypto/crypto.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:package_examples/shared/appbar.dart';
 import 'package:package_examples/shared/package_weblink_view.dart';

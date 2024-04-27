@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:package_examples/packages/convex_bottom_bar/convex_bottom_bar_main.dart';
 import 'package:package_examples/packages/crypto/crypto_main.dart';
@@ -7,8 +6,10 @@ import 'package:package_examples/packages/email_valiator/email_validator_main.da
 import 'package:package_examples/packages/flutter_signin_button/flutter_signin_button.dart';
 import 'package:package_examples/packages/google_fonts/google_fonts_main.dart';
 import 'package:package_examples/packages/url_launcher/url_launcher_main.dart';
+import 'package:package_examples/packages/widget_decompiler/widget_decompiler_main.dart';
 
 import '../main.dart';
+import '../packages/custom_carousel/custom_carousel_main.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
@@ -32,6 +33,10 @@ class RouteGenerator {
         return MaterialPageRoute(builder: (_) => GoogleFontsMain());
       case '/crypto':
         return MaterialPageRoute(builder: (_) => Crypto());
+      case '/widget_decompiler':
+        return MaterialPageRoute(builder: (_) => WidgetDecompilerMain());
+      case '/flutter_custom_carousel':
+        return MaterialPageRoute(builder: (_) => CustomCarouselMain());
       default:
         return _errorRoute(message: 'wrong routing name');
     }

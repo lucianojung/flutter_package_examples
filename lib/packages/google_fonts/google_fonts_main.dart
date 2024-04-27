@@ -1,10 +1,8 @@
 import 'dart:collection';
 import 'dart:math';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:package_examples/shared/appbar.dart';
 import 'package:package_examples/shared/material_dropdown_view.dart';
 import 'package:package_examples/shared/package_weblink_view.dart';
@@ -65,7 +63,7 @@ class _GoogleFontsMainState extends State<GoogleFontsMain> {
                     alignment: Alignment.centerLeft,
                     heightFactor: 1.5,
                     child: Text('Sentence',
-                        style: Theme.of(context).textTheme.headline6),
+                        style: Theme.of(context).textTheme.titleLarge),
                   ),
                   TextField(
                     cursorColor: Theme.of(context).primaryColor,

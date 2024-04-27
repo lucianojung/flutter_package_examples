@@ -1,4 +1,5 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:package_examples/service/MyTheme.dart';
 import 'package:package_examples/service/route_generator.dart';
@@ -19,14 +20,25 @@ class MyApp extends StatelessWidget {
         final themeProvider = Provider.of<ThemeProvider>(context);
 
         return MaterialApp(
+          scrollBehavior: AppScrollBehavior(),
           debugShowCheckedModeBanner: false,
           themeMode: themeProvider.themeMode,
           theme: MyTheme.lightTheme,
           darkTheme: MyTheme.darkTheme,
           onGenerateRoute: RouteGenerator.generateRoute,
-          initialRoute: '/',
+          initialRoute: '/flutter_custom_carousel',
         );
       });
+}
+
+// Create a subclass of ScrollBehavior that enables scrolling via mouse drag.
+class AppScrollBehavior extends ScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices {
+    final devices = Set<PointerDeviceKind>.from(super.dragDevices);
+    devices.add(PointerDeviceKind.mouse);
+    return devices;
+  }
 }
 
 class HomeView extends StatefulWidget {
@@ -39,17 +51,19 @@ class _HomeViewState extends State<HomeView> {
 
   List<CustomListTile> listTileList = <CustomListTile>[
     CustomListTile(
-        Icons.email_outlined, 'Email Validator', '2.0.1', '/email_validator', 0),
+        Icons.email_outlined, 'Email Validator', '2.1.17', '/email_validator', 0),
     CustomListTile(Icons.facebook, 'Flutter Signin Button', '2.0.0',
         '/flutter_signin_button', 1),
-    CustomListTile(Icons.view_agenda_outlined, 'Convex BottomAppBar', '3.0.0',
+    CustomListTile(Icons.view_agenda_outlined, 'Convex BottomAppBar', '3.2.0',
         '/convex_bottom_bar', 2),
     CustomListTile(
-        Icons.calendar_today, 'Date Format', '2.0.4', '/date_format', 3),
-    CustomListTile(Icons.launch, 'Url Launcher', '6.0.17', '/url_launcher', 4),
+        Icons.calendar_today, 'Date Format', '2.0.7', '/date_format', 3),
+    CustomListTile(Icons.launch, 'Url Launcher', '6.2.6', '/url_launcher', 4),
     CustomListTile(
-        Icons.font_download_outlined, 'Google Fonts', '2.2.0', '/google_fonts', 5),
-    CustomListTile(Icons.lock_outline, 'Crypto', '3.0.1', '/crypto', 6),
+        Icons.font_download_outlined, 'Google Fonts', '6.2.1', '/google_fonts', 5),
+    CustomListTile(Icons.lock_outline, 'Crypto', '3.0.3', '/crypto', 6),
+    //CustomListTile(Icons.search, 'Widget Decompiler', '0.9.1', '/widget_decompiler', 7),
+    CustomListTile(Icons.view_carousel, 'Flutter Custom Carousel', '0.1.0+1', '/flutter_custom_carousel', 8),
   ];
 
   @override
@@ -104,7 +118,7 @@ class _HomeViewState extends State<HomeView> {
                 subtitle: Text('...'),
                 onTap: () {
                   setState(() {
-                    _launchUrl('https://lucianojung.medium.com/');
+                    _launchUrl(Uri.parse('https://lucianojung.medium.com/'));
                   });
                 },
               ),
@@ -115,11 +129,9 @@ class _HomeViewState extends State<HomeView> {
     );
   }
 
-  Future<void> _launchUrl(String url) async {
-    if (await canLaunch(url)) {
-      launch(url);
-    } else {
-      throw 'Could not launch $url';
+  Future<void> _launchUrl(Uri _url) async {
+    if (!await launchUrl(_url)) {
+      throw Exception('Could not launch $_url');
     }
   }
 

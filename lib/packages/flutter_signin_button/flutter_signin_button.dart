@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 import 'package:package_examples/shared/appbar.dart';
@@ -72,7 +71,7 @@ class _FlutterSigninButtonMainState extends State<FlutterSigninButtonMain> {
                   alignment: Alignment.centerLeft,
                   child: Text(
                     'Signin Button Builder',
-                    style: Theme.of(context).textTheme.headline5,
+                    style: Theme.of(context).textTheme.headlineSmall,
                   ),
                 ),
                 RadioListTile<IconData>(

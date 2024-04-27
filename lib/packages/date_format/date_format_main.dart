@@ -132,7 +132,7 @@ class _DateFormatMainState extends State<DateFormatMain> {
                             padding: EdgeInsets.all(8),
                             child: Text(
                               "CheatSheet",
-                              style: Theme.of(context).textTheme.subtitle1,
+                              style: Theme.of(context).textTheme.titleMedium,
                             ),
                           ),
                           collapsed: SizedBox(),
@@ -144,7 +144,7 @@ class _DateFormatMainState extends State<DateFormatMain> {
                                 child: SelectableText.rich(
                                   TextSpan(
                                     style:
-                                        Theme.of(context).textTheme.subtitle2,
+                                        Theme.of(context).textTheme.titleSmall,
                                     text: 'yy or yyyy  ->  Year\n' +
                                         'm or mm   ->  Number of Month\n' +
                                         'm or mm   ->  Number of Month\n' +
@@ -193,7 +193,7 @@ class _DateFormatMainState extends State<DateFormatMain> {
                   padding: EdgeInsets.all(16.0),
                   child: Text(
                     _formattedText,
-                    style: Theme.of(context).textTheme.headline6,
+                    style: Theme.of(context).textTheme.titleLarge,
                   ),
                 ),
                 PackageWeblinkView('date_format 2.0.4',

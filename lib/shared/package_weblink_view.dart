@@ -33,7 +33,7 @@ class PackageWeblinkView extends StatelessWidget {
                   subtitle: RichText(
                     text: TextSpan(
                       text: _url,
-                      style: Theme.of(context).textTheme.bodyText1!.copyWith(
+                      style: Theme.of(context).textTheme.bodyLarge!.copyWith(
                             color: Colors.blue,
                             decoration: TextDecoration.underline,
                           ),
