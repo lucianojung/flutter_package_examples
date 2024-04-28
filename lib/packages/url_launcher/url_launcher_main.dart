@@ -30,7 +30,7 @@ class _UrlLauncherState extends State<UrlLauncher> {
   bool _universalLinksOnly = false;
   bool _statusBarBrigthness = false;
   bool _webOnlyWindowName = false;
-  Map<String, String> _headers = <String, String>{'my_header_key': 'my_header_value'};
+  //Map<String, String> _headers = <String, String>{'my_header_key': 'my_header_value'};
 
   String _urlLauncherVersion = 'url_launcher 6.0.17';
 
