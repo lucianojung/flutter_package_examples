@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
           theme: MyTheme.lightTheme,
           darkTheme: MyTheme.darkTheme,
           onGenerateRoute: RouteGenerator.generateRoute,
-          initialRoute: '/flutter_custom_carousel',
+          initialRoute: '/',
         );
       });
 }
