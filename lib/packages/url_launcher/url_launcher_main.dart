@@ -250,20 +250,20 @@ class _UrlLauncherState extends State<UrlLauncher> {
   }
 
   void _launchUrl(String url) async {
-    if (await canLaunch(url)) {
+    if (await canLaunchUrl(Uri.parse(url))) {
       if (!_isWebUrl)
-        launch(url);
+        launchUrl(Uri.parse(url));
       else
-        launch(
-            url,
-          forceSafariVC: _forceSafarieVC,
-          forceWebView: _forceWebView,
-          enableJavaScript: _javaScriptEnabled,
-          enableDomStorage: _enableDomStorage,
-          universalLinksOnly: _universalLinksOnly,
+        launchUrl(
+            Uri.parse(url),
+          // forceSafariVC: _forceSafarieVC,
+          // forceWebView: _forceWebView,
+          // enableJavaScript: _javaScriptEnabled,
+          // enableDomStorage: _enableDomStorage,
+          // universalLinksOnly: _universalLinksOnly,
           webOnlyWindowName: _webOnlyWindowName ? '_self' : '_blank',
-          statusBarBrightness: _statusBarBrigthness ? Brightness.dark : Brightness.light,
-          headers: (_sendHeaderInfos) ? _headers : {}
+          // statusBarBrightness: _statusBarBrigthness ? Brightness.dark : Brightness.light,
+          // headers: (_sendHeaderInfos) ? _headers : {}
         );
     } else {
       throw 'Could not launch $url';

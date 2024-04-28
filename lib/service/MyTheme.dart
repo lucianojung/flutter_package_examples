@@ -17,6 +17,9 @@ class MyTheme {
   static TextStyle _blackTextStyle = TextStyle(color: Colors.black);
   static TextStyle _black54TextStyle = TextStyle(color: Colors.black54);
   static TextStyle _black87TextStyle = TextStyle(color: Colors.black87);
+  static TextStyle _whiteTextStyle = TextStyle(color: Colors.white);
+  static TextStyle _white54TextStyle = TextStyle(color: Colors.white54);
+  static TextStyle _white70TextStyle = TextStyle(color: Colors.white70);
 
   static final lightTheme = ThemeData.light().copyWith(
     primaryColor: _mainColor,
@@ -38,6 +41,18 @@ class MyTheme {
 
   static final darkTheme = ThemeData.dark().copyWith(
     primaryColor: _mainColor,
+    textTheme: TextTheme(
+      displayLarge: _whiteTextStyle,
+      displayMedium: _whiteTextStyle,
+      displaySmall: _whiteTextStyle,
+      headlineMedium: _whiteTextStyle,
+      headlineSmall: _whiteTextStyle,
+      titleLarge: _whiteTextStyle,
+      bodyLarge: _white54TextStyle,
+      bodyMedium: _white54TextStyle,
+      titleMedium: _white70TextStyle,
+      titleSmall: _white70TextStyle,
+    ),
     appBarTheme: _appBarTheme,
     colorScheme: ColorScheme.fromSwatch().copyWith(secondary: _secondaryColor),
   );

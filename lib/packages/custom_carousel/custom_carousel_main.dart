@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
@@ -177,8 +176,8 @@ class _CustomCarouselState extends State<CustomCarouselMain> {
                     max: 1,
                     divisions: 20,
                     labels: RangeLabels(
-                      _flipH.start.toStringAsFixed(1).toString(),
-                      _flipH.end.toStringAsFixed(1).toString(),
+                      '${(_flipH.start * 10).roundToDouble() / 10}',
+                      '${(_flipH.end * 10).roundToDouble() / 10}',
                     ),
                     onChanged: (newRange) {
                       setState(() {
@@ -192,8 +191,8 @@ class _CustomCarouselState extends State<CustomCarouselMain> {
                     max: 1,
                     divisions: 20,
                     labels: RangeLabels(
-                      _flipV.start.toStringAsFixed(1).toString(),
-                      _flipV.end.toStringAsFixed(1).toString(),
+                      '${(_flipV.start * 10).roundToDouble() / 10}',
+                      '${(_flipV.end * 10).roundToDouble() / 10}',
                     ),
                     onChanged: (newRange) {
                       setState(() {
@@ -241,8 +240,8 @@ class _CustomCarouselState extends State<CustomCarouselMain> {
                     max: 1,
                     divisions: 20,
                     labels: RangeLabels(
-                      _slideX.start.toStringAsFixed(1).toString(),
-                      _slideX.end.toStringAsFixed(1).toString(),
+                      '${(_slideX.start * 10).roundToDouble() / 10}',
+                      '${(_slideX.end * 10).roundToDouble() / 10}',
                     ),
                     onChanged: (newRange) {
                       setState(() {
@@ -256,8 +255,8 @@ class _CustomCarouselState extends State<CustomCarouselMain> {
                     max: 5,
                     divisions: 50,
                     labels: RangeLabels(
-                      _slideY.start.toStringAsFixed(1).toString(),
-                      _slideY.end.toStringAsFixed(1).toString(),
+                      '${(_slideY.start * 10).roundToDouble() / 10}',
+                      '${(_slideY.end * 10).roundToDouble() / 10}',
                     ),
                     onChanged: (newRange) {
                       setState(() {

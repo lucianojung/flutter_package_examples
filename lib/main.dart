@@ -18,6 +18,8 @@ class MyApp extends StatelessWidget {
       create: (context) => ThemeProvider(),
       builder: (context, _) {
         final themeProvider = Provider.of<ThemeProvider>(context);
+        themeProvider.toggleTheme(!themeProvider.isDarkMode);
+        themeProvider.toggleTheme(!themeProvider.isDarkMode);
 
         return MaterialApp(
           scrollBehavior: AppScrollBehavior(),
@@ -81,6 +83,7 @@ class _HomeViewState extends State<HomeView> {
   }
 
   Widget _body() {
+    ThemeData _themeData = Theme.of(context);
     return SafeArea(
       child: Container(
         // width: 1280,
@@ -97,25 +100,25 @@ class _HomeViewState extends State<HomeView> {
               ),
               for (CustomListTile listTile in listTileList)
                 ListTile(
-                  leading: Icon(listTile.iconData),
-                  title: Text(listTile.title),
-                  subtitle: Text('Version: ${listTile.version}'),
+                  leading: Icon(listTile.iconData, color: _themeData.textTheme.titleMedium?.color),
+                  title: Text(listTile.title, style: _themeData.textTheme.titleMedium),
+                  subtitle: Text('Version: ${listTile.version}', style: _themeData.textTheme.titleSmall),
                   onTap: () {
                     setState(() {
                       Navigator.of(context).pushNamed(listTile.route);
                     });
                   },
-                  trailing: Icon(Icons.arrow_forward),
+                  trailing: Icon(Icons.arrow_forward, color: _themeData.textTheme.titleMedium?.color),
                 ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 child: Divider(),
               ),
               ListTile(
-                leading: Icon(Icons.assistant),
-                trailing: Icon(Icons.launch),
-                title: Text('Upcoming'),
-                subtitle: Text('...'),
+                leading: Icon(Icons.assistant, color: _themeData.textTheme.titleMedium?.color),
+                trailing: Icon(Icons.launch, color: _themeData.textTheme.titleMedium?.color),
+                title: Text('Upcoming', style: _themeData.textTheme.titleMedium),
+                subtitle: Text('...', style: _themeData.textTheme.titleSmall),
                 onTap: () {
                   setState(() {
                     _launchUrl(Uri.parse('https://lucianojung.medium.com/'));
